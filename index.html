@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<head>
+	<title>Home | Scholar Plot</title>
+
+	<meta charset='utf-8'>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta http-equiv="cache-control" content="max-age=0" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+	<meta http-equiv="pragma" content="no-cache" />
+
+	<meta name="Author" content="Dinesh Majeti">
+	<meta name="Author" content="Karl Kyeongan Kwon">
+
+	<link rel="icon" type="image/png" href="./images/icon.png" />
+
+
+	<!-- CSSs -->
+	<link href="./css/nv.d3.css" rel="stylesheet" type="text/css">
+	<link href="./css/main.css" rel="stylesheet" type="text/css">
+	<link href="./css/menustyles.css" rel="stylesheet" type="text/css">
+	<link href="./css/autocomplete.css" rel="stylesheet" type="text/css">
+	<!-- <link href="./css/jquery-ui.css"  rel="stylesheet" type="text/css"> -->
+
+
+	<!-- Fonts -->
+	<link href="./css/fonts.css" rel='stylesheet' type='text/css'>
+
+
+</head>
+
+
+<style>
+	body { overflow-y:scroll; }
+	#plot_journal { margin:0; }
+	#plot_journal svg { height: 650px; /* + 250px for new tooptip and added margin-bottom 250px*/ }
+	#plot_funding { margin: 0; }
+	#plot_funding svg { height: 400px; }
+</style>
+
+<body onLoad="document.searchForm.gid.focus();">
+<div class="wrapper">
+
+	<!-- Top Menu Contents -->
+	<div id='cssmenu'>
+	<ul>
+		<!-- <li class=''><a href='index.html'><span>Scholar Plot</span></a></li> -->
+		<!-- <li class='active'><a href='scholarplot.html'><span>Home</span></a>
+			<ul>
+				<li class=''><a href='scholarplot.html'><span>Scholar Plot</span></a></li>
+				<li class=''><a href='scholarcompare.html'><span>Scholar Compare</span></a></li>
+			</ul>
+		</li> -->
+		<li class=''><img src='./images/icon.png' height="50" style="margin:1px"></li>
+		<li class='active'><a href='index.html'><span>Scholar Plot</span></a></li>
+		<li class=''><a href='scholarcompare.html'><span>Scholar Compare</span></a></li>
+		<li><a href='help.html'><span>Help</span></a></li>
+		<!-- <li><a href='support.html'><span>Support</span></a></li> -->
+		<li><a href='contact.html'><span>Contact</span></a></li>
+	</ul>
+	</div>
+	<!-- End of Top Menu Contents -->
+
+	<!-- <table border="0"><tr><td height="20px"></td></tr></table> -->
+
+
+	<!-- Search Contents -->
+	<div id="Title">Scholar Plot <br>
+		<div id="subTitle">
+		Visualize a scholar's accomplishments at a glance!</div>
+	</div>
+
+
+	<div id="search-form">
+	<form name="searchForm" class="form-container" method="get" autocomplete="off" action="" onsubmit="return yes_no(this.form)">
+
+
+		<div class="input_container">
+			<input type="field" id="displayname" maxlength="55" onkeyup="autocomplet(this.form)"    autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Enter Scholar Name (e.g., Brian Uzzi)" class="search-field" >
+			<input type="hidden" id="gid" />
+			<ul id="name_list_id"></ul>
+		</div>
+
+		<div class="submit-container"><input class="submit" type="submit" value="" /></div>
+
+	</form>
+
+	</div><!-- content -->
+
+
+	<!-- End of Search Contents -->
+
+
+
+	<div class="dialog">
+
+		<!-- Dialog Closed Button Top Right -->
+		<img class="close-image" src="./images/close.png" />
+
+			<form id="saveForm" name="saveForm" action="#" method="POST" autocomplete="off" onsubmit="return save_id(this.form)" >
+
+					<table align="center" border="0" width="90%">
+					<tr>
+						<td>
+
+						<p>The name is not found in our system. <br/>Enter the Google scholar <b>URL</b> below. <br/>More information is available <a href='help.html#howtofind'>here</a>.</p>
+						<!--
+						<p>The name is not found in our system. Enter the Google scholar <b>ID</b> below. More information is available at <a href='support.html' target="new">here</a>.</p>
+						-->
+						</td>
+					</tr>
+					<tr>
+						<td style='padding:8px 0px 0px 0px'>
+							<div class="input_container">
+									<input required title="Google Scholar URL (required)" maxlength="255" type="text" id="gid" name="gid" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Google Scholar URL (required)" class="search-field" >
+								</div>
+									<span class="error" aria-live="polite"></span>
+						</td>
+					</tr>
+
+					<!--<tr>
+						<td style='padding:8px 0px 0px 0px'>
+									<div class="input_container">-->
+										<input pattern="[A-Za-z -]{5,255}" required title="Google Scholar Name (required, at least 5 characters, no punctuation)" maxlength="55" type="hidden" name="gname" id="gname" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Google Scholar Name (required)" class="search-field" >
+<!--                                    </div>
+										<span class="error" aria-live="polite"></span>
+						</td>
+					</tr>-->
+
+					<tr>
+						<td style='text-align:left;padding:20px 0px 0px 0px'>
+									<span><input type="submit" value="Submit" style="border-radius: 5px; padding: 10px;"></span>
+						</td>
+					</tr>
+				</table>
+
+			</form>
+	</div>
+
+
+	<div id="hr"></div>
+
+
+
+
+	<!-- Scholar Information -->
+	<div id="info">
+		<div id="author_name"></div>
+		<div id="author_citation"></div>
+		<div id="author_download"><button class="btn btn-success" id="save_as_svg" value="" style="display:none;"><img src="./images/download-button.png" width="100"/></button></div>
+		<div id="switch"></div>
+	</div>
+	<!-- End of Scholar Information -->
+
+	<!-- Scatter Chart for Journal -->
+	<div id="offsetDiv">
+	<div id="plot_journal" class='with-3d-shadow with-transitions'>
+		<svg></svg>
+	</div>
+	</div>
+
+	<div id="hr_dotted"></div>
+
+	<!-- Line Chart for NSF funding -->
+	<div id="offsetDiv">
+	<div id="plot_funding" class='with-3d-shadow with-transitions'>
+		<svg></svg>
+	</div>
+	</div>
+
+	<div id="blockMessage" style="display:none">Please wait...</div>
+
+
+
+
+	<table border="0"><tr><td height="100px"></td></tr></table>
+
+<div class="push"></div></div> <!-- End of Wrapper -->
+
+
+
+<script type="text/javascript">
+
+//$('#cssmenu').prepend('<div   id="bg-one"></div><div id="bg-two"></div><div id="bg-three"></div><div id="bg-four"></div>');
+
+
+// var chart;
+var g_data, nsf_data, nsf_log_data, author, isLogScale, max_citation, minYear, curYear;
+var nsf_details_by_year, nih_data, nih_details, nih_details_by_year, total_fund;
+var nsf_summary, nih_summary, total_details_by_year;
+var confTitleArray, confNameArray, confCiteArray;
+var patentTitleArray, patentNameArray, patentCiteArray;
+
+var g_data = "";
+var previous = "null";
+var isSaveAction = false;
+
+
+
+// return a parameter value from the current URL
+function getParam ( sname, url )
+{
+  var params = url.substr(url.indexOf("?")+1);
+  var sval = "";
+  params = params.split("&");
+	// split param and value into individual pieces
+	for (var i=0; i<params.length; i++)
+	{
+		temp = params[i].split("=");
+		if ( [temp[0]] == sname ) { sval = temp[1]; }
+	}
+  return sval;
+}
+
+function save_id()
+{
+	isSaveAction = true;
+
+	var url = document.saveForm.gid.value;
+	var gid = getParam('user', url);
+
+	if (gid.length != 12)
+	{
+		alert("The URL must include 12 characters Google Scholar ID (e.g., user=cQan1qQAAAAJ). Try it again!");
+		return false;
+	}
+	else
+	{
+		document.searchForm.gid.value = gid; //document.saveForm.gid.value;
+
+		yes_no();
+
+		return false;
+	}
+}
+
+
+function yes_no()
+{
+	var id = document.searchForm.gid.value;
+
+	if ( id.length == 12 )//&& dis.length >= 5 )
+	{
+		init();
+		requestJSONP();
+		previous = id;  // save ID to avoid multiple transactions
+	}
+	return false;
+}
+
+function refreshPlots()
+{
+	$("#plot_journal").html("");
+	$("#plot_journal").prepend("<svg></svg>");
+}
+
+function init()
+{
+	$("#hr").html("");
+	$("#author_name").html("");
+	$("#author_citation").html("");
+	$("#switch").html("");
+	$("#hr_dotted").html("");
+
+	refreshPlots();
+
+	$("#plot_funding").html("");
+	$("#plot_funding").prepend("<svg></svg>");	
+
+	isLogScale = true;
+
+	dfd = $.Deferred();
+	dfd.done(displayStaticData);
+//  dfd.done(startScatterPlot);
+}
+
+function getSortedCoAuthorString(coAuthorArray)
+{
+	var coAuthorString = "";
+	var coAuthorSubset = new Array();
+	var finalCounts = g_data.finalCounts;
+
+	coAuthorArray.forEach(function(coAuthor) {
+		var pubCount = 0;
+		if(coAuthor !== "..." && coAuthor != "") {
+			var splitNameArray = coAuthor.split(" ");
+			var lastName = capitalizeFirstLetter(splitNameArray.pop());
+			var authorCleaned = splitNameArray[0].charAt(0).toUpperCase() + " " + lastName;
+			pubCount = g_data.finalCounts[authorCleaned];
+		}
+		coAuthorSubset.push({ name: coAuthor, count: pubCount});
+	});
+
+//  var sorted = coAuthorSubset.sort(function(a,b) {
+//      var diff = b.count - a.count;
+//      return (diff == 0) ? (a.name>b.name): diff;
+//  });
+
+
+	// Add main author to author list when s/he is not present
+//  if( sorted[0].count != finalCounts[Object.keys(finalCounts)[0]] )
+//      sorted.unshift({ name: g_data.author_shortName, count: finalCounts[Object.keys(finalCounts)[0]]});
+
+	sorted = coAuthorSubset;
+
+	// Start HTML table that has information
+	coAuthorString = "<table border=0 cellpadding=0 cellspacing=0>";
+
+
+	for ( var index = 0 ; index<sorted.length ; index++ )
+	{
+		coAuthorString += "<tr><td align=right>" + sorted[index].name + "</td>";
+
+		// format the display string - do not display count if author is "..." or ""
+		if( sorted[index].name == "..." || sorted[index].name == "") {
+			coAuthorString += "<td></td>";
+			break;
+		}
+
+		switch(index+1){
+			case 1:
+				coAuthorString += "<td><img src='./images/1by11-1.gif' height='11' width='"+ (sorted[index].count * 2)  + "'/>" + " (" + sorted[index].count + ")</td>";
+				break;
+			case 2:
+				coAuthorString += "<td><img src='./images/1by11-2.gif' height='11' width='"+ (sorted[index].count * 2)  + "'/>" + " (" + sorted[index].count + ")</td>";
+				break;
+			case 3:
+				coAuthorString += "<td><img src='./images/1by11-3.gif' height='11' width='"+ (sorted[index].count * 2)  + "'/>" + " (" + sorted[index].count + ")</td>";
+				break;
+			case 4:
+				coAuthorString += "<td><img src='./images/1by11-4.gif' height='11' width='"+ (sorted[index].count * 2)  + "'/>" + " (" + sorted[index].count + ")</td>";
+				break;
+			case 5:
+				coAuthorString += "<td><img src='./images/1by11-5.gif' height='11' width='"+ (sorted[index].count * 2)  + "'/>" + " (" + sorted[index].count + ")</td>";
+				break;
+			default:
+				coAuthorString += "<td><img src='./images/1by11-default.gif' height='11' width='"+ (sorted[index].count * 2)  + "'/>" + " (" + sorted[index].count + ")</td>";
+				break;
+		}
+
+		// if authors > 7, close the table and end this loop
+		if ( (index+1)  == 7 )
+		{
+			coAuthorString += "<tr><td align=right>...</td>";
+			break;
+		}
+	}
+
+	coAuthorString += "</tr></table>";
+
+	// replace any "..." to "... et al" (6/30/2015)
+	return coAuthorString.replace("...", "<b>...</b> et al<b>.</b>");
+}
+
+function startScatterPlot()
+{
+	//var scatterChartLabels = ['0.25','0.5','1','2','4','8','16','32','64'];
+	var scatterChartLabels = ['0','10','100','1000','10000'];
+
+	nv.addGraph(function() {
+		chart = nv.models.scatterChart()
+		.margin({left: 100})
+		.margin({right: 50})
+		.margin({bottom: 250})  // for bottom tooltip
+		.showDistX(true)
+		.showDistY(true)
+		.tooltipYContent(null)
+		.tooltipXContent(null)
+		//.useVoronoi(true)
+		// .color(d3.scale.category10().range())
+		.color(["rgb(255,95,0)", "rgb(0,200,0)", "rgb(0,0,255)", "rgb(119,136,153)"])
+		.transitionDuration(300)
+		.xDomain([minYear-1, curYear])
+		.sizeRange([30, 750]);
+		;
+
+		chart.legend.margin({top: 30}); // Added on June 10, 2015 for Adding Title Section in a SVG group
+
+		chart.scatter.onlyCircles(false);
+
+
+		chart.tooltipContent(function(key, x, y, e)
+		{
+			if ( key == 'Journal' )
+			{
+
+
+
+				return '<div align="center"><p class="capitalize">'
+//              + '<b><a href="'+ g_data.journal_pubURLArray[e.pointIndex] + '" target="_blank">'+ g_data.journal_titleArray[e.pointIndex] + '</a></b>'
+				+ '<b><a href="'+ g_data.journal_pubURLArray[e.pointIndex] + '" target="_blank">'+ ((g_data.journal_titleArray[e.pointIndex].length < 100) ? g_data.journal_titleArray[e.pointIndex]:(g_data.journal_titleArray[e.pointIndex].substr(0,99)+" ..."))  + '</a></b>'
+				+ ' (' + g_data.journal_yearArray[e.pointIndex] + ')'
+				+ ' [Citations: ' + g_data.journal_citeArray[e.pointIndex] + ']'
+				+ '<br><i>' + g_data.journal_nameArray[e.pointIndex] + '</i>'
+				+ ' [IF: ' + g_data.journal_impactFactorArray[e.pointIndex] + ']'
+//              + '</div>'
+				+ '<hr id="hr_Dotted"/>'
+//              + '<div style="padding-left: 1cm;">'
+				+ getSortedCoAuthorString(g_data.journal_pubAuthorArray[e.pointIndex].toString().split(','))
+				+ '</div>'
+				+ '</p>';
+
+//              + '<div id="hr_dotted" align="center"><hr id="hr_Dotted" style="width: 100px"/></div>'
+//              + '<div align="center" style="line-height: 130%;"><b>Authors</b><br/>'
+			}
+			else if (key ==  'Conference / Book')
+			{
+				// var coAuthorString = "";
+				// var coAuthorSubset = new Array();
+				// var tempCoAuthorArray = g_data.conf_pubAuthorArray[e.pointIndex].toString().split(',');
+				// tempCoAuthors.forEach(function(coAuthor) {
+				// coAuthorSubset.push({ name: coAuthor, count: g_data.finalCounts[coAuthor]});
+				// });
+
+				// var sorted = coAuthorSubset.sort(function(a,b) {
+				// return b.count - a.count ;
+				// });
+				// sorted.forEach(function(coAuthor) {
+				// coAuthorString += coAuthor.name + " : " + coAuthor.count + "<br/>";
+				// });
+
+				//var coAuthorString = getSortedCoAuthorString(tempCoAuthors);
+
+				return '<div align="center"><p class="capitalize">'
+				+ '<b><a href="'+ g_data.conf_pubURLArray[e.pointIndex] + '" target="_blank">'+ ((g_data.conf_titleArray[e.pointIndex].length < 100) ? g_data.conf_titleArray[e.pointIndex]:(g_data.conf_titleArray[e.pointIndex].substr(0,99)+" ..."))  + '</a></b>'
+//              + '<b><a href="' + g_data.conf_pubURLArray[e.pointIndex] + '" target="_blank">' + g_data.conf_titleArray[e.pointIndex] + '</a></b>'
+				+ ' (' + g_data.conf_yearArray[e.pointIndex] + ')'
+				+ ' [Citations: ' + g_data.conf_citeArray[e.pointIndex] + ']'
+				+ '<br><i>' + g_data.conf_nameArray[e.pointIndex] + '</i>'
+				+ '<hr id="hr_Dotted"/>'
+				+ getSortedCoAuthorString(g_data.conf_pubAuthorArray[e.pointIndex].toString().split(','))
+				+ '</div>'
+				+ '</p>'
+				+ '</div>'  ;
+
+				// return '<div align="center"><p class="capitalize">'
+				// + '<b><a href="' + g_data.conf_pubURLArray[e.pointIndex] + '" target="_blank">' + g_data.conf_titleArray[e.pointIndex] + '</a></b>'
+				// + ' [Citations: ' + g_data.conf_citeArray[e.pointIndex] + ']'
+				// + '<br><i>' + g_data.conf_nameArray[e.pointIndex] + '</i>'
+				// + '<div id="hr_dotted"><hr id="hr_Dotted"/></div>'
+				// + g_data.conf_pubAuthorArray[e.pointIndex].toString().split(',').join('<br/>')
+				// + '</div>'
+				// + '</p>'
+				// + '</div>'   ;
+			}
+			else if (key == 'Patent')
+			{
+				return '<div align="center"><p class="capitalize">'
+				+ '<b><a href="'+ g_data.patent_pubURLArray[e.pointIndex] + '" target="_blank">'+ ((g_data.patent_titleArray[e.pointIndex].length < 100) ? g_data.patent_titleArray[e.pointIndex]:(g_data.patent_titleArray[e.pointIndex].substr(0,99)+" ..."))  + '</a></b>'
+//              + '<b><a href="' + g_data.patent_pubURLArray[e.pointIndex] + '" target="_blank">' + g_data.patent_titleArray[e.pointIndex] + '</a></b>'
+				+ ' (' + g_data.patent_yearArray[e.pointIndex] + ')'
+				+ ' [Citations: ' + g_data.patent_citeArray[e.pointIndex] + ']'
+				+ '<br><i>' + g_data.patent_nameArray[e.pointIndex] + '</i>'
+				+ '<hr id="hr_Dotted"/>'
+				+ getSortedCoAuthorString(g_data.patent_pubAuthorArray[e.pointIndex].toString().split(','))
+				+ '</div>'
+				+ '</p>'
+				+ '</div>'  ;
+			}
+
+		});
+
+		//Axis settings
+		chart.xAxis.tickFormat(d3.format('d'));
+		chart.xAxis.values
+
+		var hIndexLine = g_data.hIndex;
+
+		if( isLogScale == true )
+		{
+			chart.yDomain([-0.3,4.3]);
+			chart.yAxis.axisLabel('Number of citations [Log\u2081\u2080 scale]');
+			chart.yAxis.tickFormat(function(d) { return (scatterChartLabels[d]) });
+
+			hIndexLine = log10(hIndexLine);
+		}
+		else
+		{
+			var yMax =  parseFloat(max_citation) + 10;
+			chart.yDomain([0,yMax]);
+			chart.yAxis.axisLabel('Number of citations')
+			chart.yAxis.tickFormat(d3.format('d'));
+		}
+
+
+		/* Done setting the chart up? Time to render it!*/
+		var scatterChartData = genData();   //You need data...
+
+		if( scatterChartData[0].values.length == 0 && scatterChartData[1].values.length == 0 && scatterChartData[2].values.length == 0 )
+		{
+			if( author )
+				chart.noData('No journal publication data available for ' + author);
+		}
+
+		d3.select('#plot_journal svg')
+		.datum(scatterChartData)
+		.call(chart);
+
+		//legend
+		var shapes = ['circle', 'triangle-up', 'cross'];//, 'triangle-down', 'diamond', 'square'];
+		d3.selectAll('.nv-series')[0].forEach(function(d,i) {
+
+			if( i < 3 )// only legend for scatter chart should change
+			{ 
+				var group = d3.select(d),
+				circle = group.select('circle');
+
+				var color = circle.style('fill');
+				circle.remove();
+
+				var symbol = group.append('path')
+				.attr('d', d3.svg.symbol().type(shapes[i]))
+				.style('stroke', color)
+				.style("stroke-width", 1.5)
+				.style('fill', color)
+				//adjust size
+				.attr('transform', 'scale(1.1) translate(-2,0)') // translate(100,50)
+			}
+
+			if( hIndexLine > 0 ) {
+				var line = d3.select('#plot_journal svg')
+				.append('line')
+				.attr({
+					x1: 100 + chart.xAxis.scale()(minYear-1),
+					y1: 55 + chart.yAxis.scale()(hIndexLine),           // changed 30 to 55 for legend top margin
+					x2: 100 + chart.xAxis.scale()(curYear),
+					y2: 55 + chart.yAxis.scale()(hIndexLine)
+				})
+				.style("stroke", "#000")
+				.style("stroke-dasharray","5,5");
+			}
+		});
+
+
+		d3.select('#plot_journal svg')
+		.append("text")
+		.attr("id", "titleText")
+		.attr("x", (window.innerWidth/2))
+		.attr("y", 20)
+		.attr("text-anchor", "middle")
+		.style("font-size", "26px")
+		.text("Scholar Plot of " + g_data.author_fullname);
+
+		d3.select('#plot_journal svg')
+		.append("text")
+		.attr("id", "citationsText")
+		.attr("x", (window.innerWidth/2))
+		.attr("y", 40)
+		.attr("text-anchor", "middle")
+		.style("font-size", "12px")
+		.style("font-familiy", "times")
+		.text("Total Citations: "  + g_data.totalCitations + ", h-index: " + g_data.hIndex);
+
+		// switch between log and normal scales
+		d3.select('#switch').on("click", function() {
+			refreshPlots();
+
+			if( isLogScale == false )
+			{
+				isLogScale = true;
+				$("#switch").html("<input type=radio name=scale value=log checked> Log<sub>10</sub> <input type=radio name=scale value=decimal> Decimal");
+			}
+			else
+			{
+				isLogScale = false;
+				$("#switch").html("<input type=radio name=scale value=log> Log<sub>10</sub> <input type=radio name=scale value=decimal checked> Decimal");
+			}
+
+			startScatterPlot();
+		});
+
+		nv.utils.windowResize(function(){
+			chart.update();
+
+			d3.select("#titleText").remove();
+			d3.select('#plot_journal svg')
+			.append("text")
+			.attr("id", "titleText")
+			.attr("x", (window.innerWidth/2))
+			.attr("y", 20)
+			.attr("text-anchor", "middle")
+			.style("font-size", "26px")
+			.text("Scholar Plot of " + g_data.author_fullname);
+
+
+			d3.select("#citationsText").remove();
+			d3.select('#plot_journal svg')
+			.append("text")
+			.attr("id", "citationsText")
+			.attr("x", (window.innerWidth/2))
+			.attr("y", 40)
+			.attr("text-anchor", "middle")
+			.style("font-size", "12px")
+			.style("font-familiy", "times")
+			.text("Total Citations: "  + g_data.totalCitations + ", h-index: " + g_data.hIndex);
+
+		});
+
+		// chart.dispatch.on('stateChange', function(e) { ('New State:', JSON.stringify(e)); });
+
+		return chart;
+	});
+
+}
+
+
+function requestJSONP()
+{
+	$("#blockMessage").html('<img src="./images/busy3.gif"/> <br/>Please wait - it may take up to a minute, depending on your bandwidth and the size of the scholar\'s record.');
+	var gid = document.searchForm.gid.value;
+	var jsonURL = "./src/getData.php?gid=" + gid;
+	//var jsonURL = "http://www2.times.uh.edu/users/dinesh/scholarwebWorking/src/getData.php?gid=" + gid;
+
+	$.getJSON(jsonURL,'jsoncallback=?',function(res){
+		g_data = res;
+		minYear = g_data.minYear;
+		curYear = g_data.curYear;
+		max_citation = g_data.maxCite;
+
+		// For saving scholar_autocomplete table in DB
+		document.saveForm.gname.value = g_data.author_fullname;
+
+		requestNSFFundingJSONP();
+	});
+}
+
+function displayStaticData(){
+
+	// genderate Basic information of the Author
+	if( g_data.author_fullname == null || g_data.author_fullname == "" )
+		g_data.author_fullname = "unknown";
+
+	if ( g_data.totalCitations == null )
+		g_data.totalCitations = 0;
+
+	if ( g_data.hIndex == null )
+		g_data.hIndex = 0;
+
+//  $("#hr").prepend("<hr/>");
+//  $("#author_name").prepend("Scholar Plot of " + g_data.author_fullname);
+//  $("#author_citation").prepend("Total Citations: " + "<b>" +g_data.totalCitations + "</b>" + ", h-index: " + "<b>" + g_data.hIndex + "</b>");
+	$("#switch").html("<input type=radio name=scale value=log checked> Log<sub>10</sub> <input type=radio name=scale value=decimal> Decimal");
+//  $("#switch").append("<table border=0><tr><td height=50px></td></tr></table>");
+	$("#hr_dotted").prepend("<hr id='hr_Dotted' />");
+
+
+	// End of genderate Basic information of the Author
+
+	startScatterPlot();
+	startLinePlot();
+}
+
+function genData()
+{
+	var data = [],
+	titleAboveHindex = [];
+	titleBelowHindex = [];
+	citeAboveHindex =[];
+	citeBelowHindex = [];
+	journalAboveHindex = [];
+	journalBelowHindex = [];
+	ifAboveHindex = [];
+	ifBelowHindex = [];
+	confTitleArray =[];
+	confCiteArray = [];
+	confNameArray = [];
+	patentTitleArray = [];
+	patentCiteArray = [];
+	patentNameArray = [];
+
+	var shapes = ['circle', 'triangle-up', 'cross', 'diamond', 'triangle-up', 'triangle-down'];
+	var journalIndex = 0;
+	var confIndex = 1;
+	var patentIndex = 2;
+	var hIndex = g_data.hIndex;
+
+	data.push({
+		key: 'Journal',
+		values: []
+	});
+
+	data.push({
+		key: 'Conference / Book',
+		values: []
+	});
+
+	data.push({
+		key: 'Patent',
+		values: []
+	});
+
+	points = g_data.journal_yearArray.length ;
+
+	for (j = 0; j < points; j++) {
+
+		var csize;
+		var im = g_data.journal_impactFactorArray[j];
+
+		if( im < 2 || im == "-" )
+			csize = 30;
+		else if ( im < 4)
+			csize = 150;
+		else if ( im < 16)
+			csize = 400;
+		else
+			csize = 750;
+
+
+		//var yValue = g_data.impactFactorArray[j];
+		var yValue = g_data.journal_citeArray[j];
+
+		if( isLogScale == true)
+			yValue = log10(yValue);
+		//var yValue =  parseFloat(g_data.impactFactorArray[j]) + 1;
+		//console.log("if = " + parseFloat(g_data.impactFactorArray[j]) + "yvalue = " + yValue);
+
+		if( (isLogScale == true && yValue > 4 ) || (isLogScale == false && yValue > 10000 ))
+			shape = shapes[3];
+		else
+			shape = shapes[0];
+
+		data[journalIndex].values.push({
+			x: g_data.journal_yearArray[j],
+			y: yValue,
+			size: csize,//100,//g_data.impactFactorArray[j], //csize,// Math.log(g_data.citeArray[j] + 1 ),
+			shape: shape
+		});
+
+
+	}
+
+	var isDiamondCitation;
+	//conference / Book data
+	for (j = 0; j < g_data.conf_yearArray.length; j++) {
+
+	
+
+		var confName = g_data.conf_nameArray[j];
+		var yValue = g_data.conf_citeArray[j];
+
+		if( isLogScale == true)
+		yValue = log10(yValue);
+
+		if( (isLogScale == true && yValue > 4 ) || (isLogScale == false && yValue > 10000 ))
+			isDiamondCitation = true;
+		else
+			isDiamondCitation = false;
+
+
+		data[confIndex].values.push({
+			x: g_data.conf_yearArray[j],
+			y: yValue,
+			size: 90,
+			shape: ( isDiamondCitation == true )? shapes[3]:shapes[1],
+		});
+
+
+	}
+
+	// Patents
+	for (j = 0; j < g_data.patent_yearArray.length; j++) {
+
+		var confName = g_data.patent_nameArray[j];
+		var yValue = g_data.patent_citeArray[j];
+
+		if( isLogScale == true)
+		yValue = log10(yValue);
+
+		if( (isLogScale == true && yValue > 4 ) || (isLogScale == false && yValue > 10000 ))
+			isDiamondCitation = true;
+		else
+			isDiamondCitation = false;
+
+
+
+		data[patentIndex].values.push({
+			x: g_data.patent_yearArray[j],
+			y: yValue,
+			size: 50,
+			shape: ( isDiamondCitation == true )? shapes[3]:shapes[2]
+		});
+
+
+	}
+
+
+	// phantom points
+	if( points > 0) {
+
+		var phantomSizes = [30,50,150,200,400,750];
+		//var phantomSizes = [0,20,60];
+
+		for (var index = 0 ; index < phantomSizes.length ; index++) {
+
+			// for journal index
+			data[journalIndex].values.push({
+				x: 0,
+				y: 0,
+				size: phantomSizes[index],
+				shape: shapes[0]
+			});
+
+			// for conference / Book index
+			data[confIndex].values.push({
+				x: 0,
+				y: 0,
+				size: phantomSizes[index],
+				shape: shapes[1]
+			});
+
+			// for patent index
+			data[patentIndex].values.push({
+				x: 0,
+				y: 0,
+				size: phantomSizes[index],
+				shape: shapes[2]
+			});
+
+		}
+	}
+
+	return data;
+}
+
+function startLinePlot()
+{
+
+	labels = ['0.06','0.12','0.25','0.5','1','2','4','8','16'];
+
+	nv.addGraph(function() {
+		var linechart = nv.models.lineChart()
+		.margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
+		.margin({right: 50})
+		.useInteractiveGuideline(false)  //We want nice looking tooltips and a guideline!
+		.transitionDuration(350)  //how fast do you want the lines to transition?
+		.showLegend(true)       //Show the legend, allowing users to turn on/off line series.
+		.showYAxis(true)        //Show the y-axis
+		.showXAxis(true)        //Show the x-axis
+		.xDomain([minYear-1, curYear])
+		.yDomain([-4.7, 4])
+		.tooltipContent(function(key, x, y, e) {
+			if( key == 'NSF funding')
+				return '<p>' + nsf_details_by_year[e.pointIndex] + '</p>';
+			else if( key == 'NIH funding')
+				return '<p>' + nih_details_by_year[e.pointIndex] + '</p>';
+			else if( key == 'Total funding')
+				return '<p>' + total_details_by_year[e.pointIndex] + '</p>';
+		});
+
+		linechart.legend.margin({top: 30});
+
+		linechart.xAxis     //Chart x-axis settings
+		.axisLabel('Year')
+		.tickFormat(d3.format('d'));
+
+		linechart.yAxis     //Chart y-axis settings
+		.axisLabel('Funding (Million $) [Log\u2082 scale]')
+		.tickFormat(function(d) { return (labels[d+4]) });
+
+		/* Done setting the chart up? Time to render it!*/
+		var myData = getLineChartData();   //You need data...
+
+		// if( myData[0].values.length == 0 )
+		{
+			//console.log('empty');
+
+			if( author )
+				linechart.noData('No funding data available for ' + author);
+		}
+
+
+		d3.select('#plot_funding svg')    //Select the <svg> element you want to render the chart in.
+		.datum(myData)         //Populate the <svg> element with chart data...
+		.call(linechart);          //Finally, render the chart!
+
+
+		//Update the chart when window resizes.
+		nv.utils.windowResize(function() { linechart.update() });
+		return linechart;
+	});
+
+	// $.unblockUI();
+	//$.growlUI('Notification', 'Successfully!');
+}
+
+
+function getLineChartData() {
+
+	//Line chart data should be sent as an array of series objects.
+	return [
+	{
+		values: total_fund,
+		key: 'Total funding',
+		disabled: true,
+		color: '#000000'
+	},
+	{
+		values: nsf_data,   //values    - represents the array of {x,y} data points
+		key: 'NSF funding', //key  - the name of the series.
+		color: '#33ccff'  //color - optional: choose your own line color.
+	},
+	{
+		values: nih_data,
+		key: 'NIH funding',
+		color: '#ff0000'
+	}
+	];
+}
+
+
+</script>
+
+	<!-- jQuery -->
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="./js/functions.js"></script>
+	<script src="./js/jquery-ui.js"></script>
+	<script src="./js/jquery.easing.1.3.js"></script>
+	<script src="./lib/d3.v3.js"></script>
+	<script src="./js/nv.d3.js"></script>   <!-- nv.d3.js should appear after d3.js is included. -->
+	<script src="./js/tooltip.js"></script>
+	<script src="./js/models/legend.js"></script>
+	<script src="./js/models/axis.js"></script>
+	<script src="./js/models/distribution.js"></script>
+	<script src="./js/models/scatter.js"></script>
+	<script src="./js/models/scatterChart.js"></script>
+	<script src="./js/fundings.js"></script>
+
+	<!-- Functions -->	
+	<script src="./js/jquery.blockUI.js"></script>
+	<script src="./js/menu.js"></script>
+	<script src="./js/autocomplete.js"></script>
+	<script src="./js/saveSvgAsPng.js"></script>
+
+	<!-- Download files as SVG -->
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+			$("#save_as_svg").click(function() {
+				download_svg(1);
+			});
+		});
+
+	</script>
+	<!-- End of Download files as SVG -->
+
+
+	<!-- Footer Contents -->
+	<div class="footer">
+
+		©<script>var today = new Date(); var currentYear = today.getFullYear(); document.write(currentYear);</script> Computational Physiology Lab | NSF Grant No.1135357 <img src="./images/nsf1.gif" width="50" vertical-align:middle;/>
+
+	</div>
+	<!-- End of Footer Contents -->
+
+<script>
+$(function(){
+    $("a.counter").click(function()
+    {
+         $.get("scholarcompare.html" );
+         return false; // prevent default browser refresh on "#" link
+    });
+});
+</script>
+
+
+	<!-- Piwik -->
+	<script type="text/javascript">
+	  var _paq = _paq || [];
+	  _paq.push(['trackPageView']);
+	  _paq.push(['enableLinkTracking']);
+	  (function() {
+	    var u="//kyeongan.cpl.uh.edu/projects/piwik/";
+	    _paq.push(['setTrackerUrl', u+'piwik.php']);
+	    _paq.push(['setSiteId', 1]);
+	    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+	    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+	  })();
+	</script>
+	<noscript><p><img src="//kyeongan.cpl.uh.edu/projects/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+	<!-- End Piwik Code -->
+
+
+</body>

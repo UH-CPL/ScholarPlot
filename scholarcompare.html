@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<head>
+    <title>Compare | Scholar Plot</title>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta name="Author" content="Dinesh Majeti">
+    <meta name="Author" content="Karl Kyeongan Kwon">
+    <link rel="icon" type="image/png" href="./images/icon.png" />
+    <!-- CSSs -->
+    <link href="./css/nv.d3.css" rel="stylesheet" type="text/css">
+    <link href="./css/main.css" rel="stylesheet" type="text/css">
+    <link href="./css/menustyles.css" rel="stylesheet" type="text/css">
+    <link href="./css/autocomplete.css" rel="stylesheet" type="text/css">
+    <link href="./css/jquery-ui.css" rel="stylesheet" type="text/css">
+    <!-- Fonts -->
+    <link href='./css/fonts.css' rel='stylesheet' type='text/css'>
+</head>
+
+<style>
+	body { overflow-y:scroll; }
+	#plot_journal_comparison { margin:0; }
+	#plot_journal_comparison svg { height: 400px; /* + 210px for new tooptip and added margin-bottom 210px*/ }
+	#plot_funding_comparison { fill-opacity: 1; stroke-opacity: 1; margin: 0; }
+	#plot_funding_comparison svg { height: 400px; fill-opacity: 1; stroke-opacity: 1; }
+	#search-form { width: 700px; }
+	.form-container { width: 630px; }
+	.input_container2 ul { margin: 142px 0 0 8px; }
+	.nvd3.nv-line .nvd3.nv-scatter .nv-groups .nv-point { fill-opacity: 0; stroke-opacity: 0; } /* Comparison line charts should be more smooth */
+	span#ui-id-1 { text-align: left; font-size: 0.7em; } /* for dialog title on 8/24/2015 */
+
+</style>
+
+<!-- onLoad="document.searchFormSecondary.gid.focus();"> -->
+<body onLoad="document.searchFormSecondary.gid.focus();">
+
+<div class="wrapper">
+
+	<!-- Top Menu Contents -->
+	<div id='cssmenu'>
+	<ul>
+		<!-- <li class=''><a href='index.html'><span>Scholar Plot</span></a></li> -->
+		<!-- <li class='active'><a href='scholarplot.html'><span>Home</span></a>
+			<ul>
+				<li class=''><a href='scholarplot.html'><span>Scholar Plot</span></a></li>
+				<li class=''><a href='scholarcompare.html'><span>Scholar Compare</span></a></li>
+			</ul>
+		</li> -->
+		<li class=''><img src='./images/icon.png' height="50" style="margin:1px"></li>
+		<li class=''><a href='index.html'><span>Scholar Plot</span></a></li>
+		<li class='active'><a href='scholarcompare.html'><span>Scholar Compare</span></a></li>
+		<li><a href='help.html'><span>Help</span></a></li>
+		<!-- <li><a href='support.html'><span>Support</span></a></li> -->
+		<li><a href='contact.html'><span>Contact</span></a></li>
+	</ul>
+	</div>
+	<!-- End of Top Menu Contents -->
+
+	<!-- <table border="0"><tr><td height="20px"></td></tr></table> -->
+
+	<!-- Search Contents -->
+	<div id="Title">Scholar Compare <br>
+		<div id="subTitle">
+		Visualize the comparison between two different scholars!</div>
+	</div>
+
+
+	<div id="search-form">
+
+
+	<form name="searchFormSecondary" class="form-container" method="get" autocomplete="off" action="#" onsubmit="return yes_no(this.form)" >
+
+		<div class="input_container">
+			<input type="field" id="displayname" maxlength="55" onkeyup="autocomplet(this.form)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="First Scholar Name" class="search-field">
+			<input type="hidden" id="gid" />
+			<ul id="name_list_id"></ul>
+		</div>
+
+		
+		<div class="input_container">
+			<input type="field" id="displaynameSecondary" maxlength="55" onkeyup="autocomplet('2')" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Second Scholar Name" class="search-field" disabled="true">
+			<input type="hidden" id="gidSecondary" />
+			<ul id="name_list_id_Secondary"></ul>
+		</div>
+
+		<div class="submit-container"><input class="submit" type="submit" value="" /></div>
+	</form>
+
+
+<!--    <div class="popup">
+		<p>Please select an author.</p>
+	</div>
+-->
+	</div><!-- content -->
+
+
+	<!-- End of Search Contents -->
+<table border="0"><tr><td height="20px"></td></tr></table>
+
+
+
+
+	<!-- Scholar Information -->
+	<div id="info">
+		<div id="author_name"></div>
+		<div id="author_citation"></div>
+		<div id="author_download"><button class="btn btn-success" id="save_as_svg" value="" style="display:none;"><img src="./images/download-button.png" width="100"/></button></div>
+		<div id="switch"></div>
+	</div>
+	<!-- End of Scholar Information -->
+
+
+
+
+
+
+	<!-- Scatter Chart for Journal -->
+	<div id="offsetDiv">
+	  <div id="plot_journal_comparison">
+		<svg></svg>
+	</div>
+
+
+
+
+	<div id="hr_dotted"></div>
+
+
+
+	<!-- Line Chart for NSF funding -->
+	<div id="offsetDiv">
+	  <div id="plot_funding_comparison">
+		<svg></svg>
+	  </div>
+	</div>
+
+	<div id="blockMessage" style="display:none">Please wait...</div>
+
+	<table border="0"><tr><td height="100px"></td></tr></table>
+
+
+	<div class="push"></div></div> <!-- End of Wrapper -->
+
+
+	<!-- Footer Contents -->
+	<div class="footer">
+
+		©<script>var today = new Date(); var currentYear = today.getFullYear(); document.write(currentYear);</script> Computational Physiology Lab | NSF Grant No.1135357 <img src="./images/nsf1.gif" width="50" vertical-align:middle;/>
+
+	</div>
+	<!-- End of Footer Contents -->
+
+
+	<div id="dialog-message" title="Scholar Plot" style="display:none">
+	  <p style="font-size:0.8em">Please choose two different scholars for this feature.</p>
+	</div>
+
+
+	<!-- jQuery -->
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="./js/jquery-ui.js"></script>
+	<script src="./js/jquery.easing.1.3.js"></script>
+	<script src="./lib/d3.v3.js"></script>
+	<script src="./js/nv.d3.js"></script>   <!-- nv.d3.js should appear after d3.js is included. -->
+	<script src="./js/tooltip.js"></script>
+	<script src="./js/models/legend.js"></script>
+	<script src="./js/models/axis.js"></script>
+	<script src="./js/models/distribution.js"></script>
+	<script src="./js/models/scatter.js"></script>
+	<script src="./js/models/scatterChart.js"></script>
+
+	<!-- Functions -->
+	<script src="./js/jquery.blockUI.js"></script>
+	<script src="./js/menu.js"></script>
+	<script src="./js/functions.js"></script>
+	<script src="./js/autocomplete.js"></script>
+	<script src="./js/saveSvgAsPng.js"></script>
+
+<script type="text/javascript">
+
+
+//$('#cssmenu').prepend('<div id="bg-one"></div><div id="bg-two"></div><div id="bg-three"></div><div id="bg-four"></div>');
+
+var g_data, nsf_data, nsf_log_data, minYear, author, isLogScale, max_citation, minYearPrimary, minYearSecondary;
+var minYear, nsf_details_by_year, nih_data, nih_details, nih_details_by_year, total_fund;
+var nsf_summary, nih_summary, total_details_by_year;
+var confTitleArray, confNameArray, confCiteArray;
+var patentTitleArray, patentNameArray, patentCiteArray;
+var compare_dataSecondary, compare_dataPrimary, g_dataPrimary,
+	nsf_dataPrimary = [], nsf_summary2,
+	nih_dataPrimary = [], nih_summary2,
+	nsf_dataMillionPrimary = [], nih_dataMillionPrimary = [],
+	nsf_dataMillionSecondary = [], nih_dataMillionSecondary = [],
+	total_fund_log2_Primary = [], total_fund_million_Primary = [],
+	total_fund_log2_Secondary = [],	total_fund_million_Secondary = [],
+	sorted_total_fund_log2_Primary = [], sorted_total_fund_log2_Secondary = [],
+	sorted_total_fund_million_Primary = [], sorted_total_fund_million_Secondary = [];
+
+
+
+var g_data = "";
+var previous = "null";
+var isSaveAction = false;
+
+
+
+// return a parameter value from the current URL
+function getParam ( sname, url )
+{
+  var params = url.substr(url.indexOf("?")+1);
+  var sval = "";
+  params = params.split("&");
+	// split param and value into individual pieces
+	for (var i=0; i<params.length; i++)
+	   {
+		 temp = params[i].split("=");
+		 if ( [temp[0]] == sname ) { sval = temp[1]; }
+	   }
+  return sval;
+}
+
+
+function yes_no()
+{
+	var idSecondary = document.searchFormSecondary.gidSecondary.value;
+	var idPrimary = document.searchFormSecondary.gid.value;
+
+//  if( id == null || id == "" ) id = "AAAAAAAAAAAA"; // non-Scholar ID
+
+//  var dis = document.searchFormSecondary. yname.value;
+	if ( idSecondary == idPrimary || idSecondary == "" )
+	{
+		document.searchFormSecondary.gidSecondary.value = "";
+		document.searchFormSecondary.gid.value = "";
+		document.searchFormSecondary.displayname.value = "";
+		document.searchFormSecondary.displaynameSecondary.value = "";
+		idSecondary = "";
+		idPrimary = "";
+		$( "#dialog-message" ) .dialog({modal: true}) .css('display', 'inline');
+	}
+	else if ( (idPrimary.length == 12) && (idSecondary.length == 12) && (idSecondary != idPrimary) )
+	{
+		init();
+		requestPrimaryJSONP();
+		// previous = idSecondary; // save ID to avoid multiple transactions
+
+	}
+	return false;	// Do not remove this important action!
+}
+
+function refreshPlots()
+{
+	$("#plot_journal_comparison").html("");
+	$("#plot_journal_comparison").prepend("<svg></svg>");
+}
+
+function init()
+{
+	$("#hr").html("");
+	$("#author_name").html("");
+	$("#author_citation").html("");
+	$("#switch").html("");
+	$("#hr_dotted").html("");
+
+	refreshPlots();
+
+	$("#plot_funding_comparison").html("");
+	$("#plot_funding_comparison").prepend("<svg></svg>");
+
+	isLogScale = false;
+
+	dfd = $.Deferred();
+	dfd.done(displayStaticData);
+}
+
+
+function getSortedCoAuthorString(coAuthorArray) {
+	var coAuthorString = "";
+	var coAuthorSubset = new Array();
+	var finalCounts = g_dataSecondary.finalCounts;
+	coAuthorArray.forEach(function(coAuthor) {
+		var pubCount = 0;
+		if(coAuthor !== "...") {
+			var splitNameArray = coAuthor.split(" ");
+			var lastName = capitalizeFirstLetter(splitNameArray.pop());
+			var authorCleaned = splitNameArray[0].charAt(0).toUpperCase() + " " + lastName;
+			pubCount = g_dataSecondary.finalCounts[authorCleaned];
+		}
+		coAuthorSubset.push({ name: coAuthor, count: pubCount});
+	});
+
+	var sorted = coAuthorSubset.sort(function(a,b) {
+		return b.count - a.count ;
+	});
+
+	// format the display string - do not display count if author is "..."
+	sorted.forEach(function(coAuthor) {
+		coAuthorString += coAuthor.name;
+		if(coAuthor.count > 0)
+			coAuthorString += " : " + coAuthor.count;
+		coAuthorString += "<br/>";
+	});
+	return coAuthorString;
+}
+
+function requestPrimaryJSONP()
+{
+	$("#blockMessage").html('<img src="./images/busy3.gif"/> <br/>Please wait - it may take up to a minute, depending on your bandwidth and the size of the scholar\'s record.');
+
+	// var gid = document.searchFormSecondary.gid.value;
+	var gid = document.searchFormSecondary.gid.value; // fixed  currently to compare with Dr. Pavlidis
+	var jsonURLSecondary = "./src/getData.php?gid=" + gid;
+
+	$.getJSON(jsonURLSecondary,'jsoncallback=?',function(res){
+		g_dataPrimary = res;
+
+		minYearPrimary = g_dataPrimary.minYear;
+
+		max_citation = parseInt(g_dataPrimary.maxCite);
+
+		if( minYearPrimary < 1960) {
+			// min Year filtered after 1960
+			var filtered_journalYears = g_dataSecondary.journal_yearArray.filter(isBigEnough);
+			var minJournalYear = Math.min.apply(Math, filtered_journalYears);
+
+			var filtered_confYears = g_dataSecondary.conf_yearArray.filter(isBigEnough);
+			var minConfYear = Math.min.apply(Math, filtered_confYears);
+
+			var filtered_patentYears = g_dataSecondary.patent_yearArray.filter(isBigEnough);
+			var minPatentYear = Math.min.apply(Math, filtered_patentYears);
+
+			minYearPrimary = Math.min( minJournalYear, minConfYear, minPatentYear ) - 1 ;
+		}
+
+		compare_dataPrimary = [];
+		for(i = 0; i < g_dataPrimary.completeDetails.length; i++)
+		{
+			compare_dataPrimary.push({x: i, y: parseInt(g_dataPrimary.completeDetails[i].citation)})
+		}
+		requestSecondaryJSONP();
+	});
+
+}
+
+function requestSecondaryJSONP()
+{
+	var gid = document.searchFormSecondary.gidSecondary.value;
+	var jsonURL = "./src/getData.php?gid=" + gid;
+
+	$.getJSON(jsonURL,'jsoncallback=?',function(res){
+
+		g_dataSecondary = res;
+		minYearSecondary = g_dataSecondary.minYear;
+		max_citation = parseInt(g_dataSecondary.maxCite) > max_citation ? parseInt(g_dataSecondary.maxCite) : max_citation;
+
+		if( minYearSecondary < 1960) {
+			// min Year filtered after 1960
+			var filtered_journalYears = g_dataSecondary.journal_yearArray.filter(isBigEnough);
+			var minJournalYear = Math.min.apply(Math, filtered_journalYears);
+
+			var filtered_confYears = g_dataSecondary.conf_yearArray.filter(isBigEnough);
+			var minConfYear = Math.min.apply(Math, filtered_confYears);
+
+			var filtered_patentYears = g_dataSecondary.patent_yearArray.filter(isBigEnough);
+			var minPatentYear = Math.min.apply(Math, filtered_patentYears);
+
+			minYearSecondary = Math.min( minJournalYear, minConfYear, minPatentYear );
+		}
+
+		minYear = Math.min( minYearPrimary, minYearSecondary );
+
+		compare_dataSecondary = [];
+		for(i = 0; i < g_dataSecondary.completeDetails.length; i++)
+		{
+			compare_dataSecondary.push({x: i, y: parseInt(g_dataSecondary.completeDetails[i].citation)})
+		}
+		requestNSFFundingJSONP();
+	});
+}
+
+
+
+
+function displayStaticData(){
+
+	// genderate Basic information of the Author
+	if( g_dataSecondary.author_fullname == null || g_dataSecondary.author_fullname == "" )
+		g_dataSecondary.author_fullname = "unknown";
+
+	if ( g_dataSecondary.totalCitations == null )
+		g_dataSecondary.totalCitations = 0;
+
+	if ( g_dataSecondary.hIndex == null )
+		g_dataSecondary.hIndex = 0;
+
+	$("#hr").prepend("<hr/>");
+//  $("#author_name").prepend("Scholar Plot of " + g_dataSecondary.author_fullname);
+//  $("#author_citation").prepend("Total Citations: " + "<b>" +g_dataSecondary.totalCitations + "</b>" + ", h-index: " + "<b>" + g_dataSecondary.hIndex + "</b>");
+	$("#switch").html("<input type=radio name=scale value=log> Log<sub>10</sub> <input type=radio name=scale value=decimal checked> Decimal");
+//  $("#switch").append("<table border=0><tr><td height=50px></td></tr></table>");
+	$("#hr_dotted").prepend("<hr id='hr_Dotted' />");
+
+
+	// End of genderate Basic information of the Author
+
+	startPublicationLinePlot();
+	startFundingLinePlot();
+}
+
+function genData()
+{
+	var data = [],
+	titleAboveHindex = [];
+	titleBelowHindex = [];
+	citeAboveHindex =[];
+	citeBelowHindex = [];
+	journalAboveHindex = [];
+	journalBelowHindex = [];
+	ifAboveHindex = [];
+	ifBelowHindex = [];
+	confTitleArray =[];
+	confCiteArray = [];
+	confNameArray = [];
+	patentTitleArray = [];
+	patentCiteArray = [];
+	patentNameArray = [];
+
+	var shapes = ['circle', 'triangle-up', 'cross', 'diamond', 'triangle-up', 'triangle-down'];
+	var journalIndex = 0;
+	var confIndex = 1;
+	var patentIndex = 2;
+	var hIndex = g_dataSecondary.hIndex;
+
+	data.push({
+		key: 'Journal',
+		values: []
+	});
+
+	data.push({
+		key: 'Conference / Book',
+		values: []
+	});
+
+	data.push({
+		key: 'Patent',
+		values: []
+	});
+
+	points = g_dataSecondary.journal_yearArray.length ;
+
+	for (j = 0; j < points; j++) {
+
+		var csize;
+		var im = g_dataSecondary.journal_impactFactorArray[j];
+
+		if( im < 2 || im == "-" )
+			csize = 30;
+		else if ( im < 4)
+			csize = 150;
+		else if ( im < 16)
+			csize = 400;
+		else
+			csize = 750;
+
+		//validate year
+		if( g_dataSecondary.journal_yearArray[j] > 1960 ){
+
+			//var yValue = g_dataSecondary.impactFactorArray[j];
+			var yValue = g_dataSecondary.journal_citeArray[j];
+
+			if( isLogScale == true)
+				yValue = log10(yValue);
+
+			if( (isLogScale == true && yValue > 4 ) || (isLogScale == false && yValue > 10000 ))
+				shape = shapes[3];
+			else
+				shape = shapes[0];
+
+			data[journalIndex].values.push({
+				x: g_dataSecondary.journal_yearArray[j],
+				y: yValue,
+				size: csize,//100,//g_dataSecondary.impactFactorArray[j], //csize,// Math.log(g_dataSecondary.citeArray[j] + 1 ),
+				shape: shape
+			});
+
+			// titleAboveHindex.push(g_dataSecondary.titleArray[j]);
+//          citeAboveHindex.push(g_dataSecondary.citeArray[j]);
+//          journalAboveHindex.push(g_dataSecondary.journalArray[j]);
+//          ifAboveHindex.push(g_dataSecondary.impactFactorArray[j]);
+
+		}
+	}
+
+	var isDiamondCitation;
+	//conference / Book data
+	for (j = 0; j < g_dataSecondary.conf_yearArray.length; j++) {
+
+		//validate year
+		if( g_dataSecondary.conf_yearArray[j] > 1960 ){
+
+			var confName = g_dataSecondary.conf_nameArray[j];
+			var yValue = g_dataSecondary.conf_citeArray[j];
+
+			if( isLogScale == true)
+			yValue = log10(yValue);
+
+			if( (isLogScale == true && yValue > 4 ) || (isLogScale == false && yValue > 10000 ))
+				isDiamondCitation = true;
+			else
+				isDiamondCitation = false;
+
+
+			data[confIndex].values.push({
+				x: g_dataSecondary.conf_yearArray[j],
+				y: yValue,
+				size: 90,
+				shape: ( isDiamondCitation == true )? shapes[3]:shapes[1],
+			});
+
+
+		}
+
+	}
+
+	// Patents
+	for (j = 0; j < g_dataSecondary.patent_yearArray.length; j++) {
+
+		//validate year
+		if( g_dataSecondary.patent_yearArray[j] > 1960 ){
+
+			var confName = g_dataSecondary.patent_nameArray[j];
+			var yValue = g_dataSecondary.patent_citeArray[j];
+
+			if( isLogScale == true)
+			yValue = log10(yValue);
+
+			if( (isLogScale == true && yValue > 4 ) || (isLogScale == false && yValue > 10000 ))
+				isDiamondCitation = true;
+			else
+				isDiamondCitation = false;
+
+
+
+			data[patentIndex].values.push({
+				x: g_dataSecondary.patent_yearArray[j],
+				y: yValue,
+				size: 50,
+				shape: ( isDiamondCitation == true )? shapes[3]:shapes[2]
+			});
+
+		/*  patentTitleArray.push(g_dataSecondary.conf_titleArray[j]);
+			patentCiteArray.push(g_dataSecondary.conf_citeArray[j]);
+			patentNameArray.push(g_dataSecondary.patent_nameArray[j]);
+*/
+		}
+
+	}
+
+
+	// phantom points
+	if( points > 0) {
+
+		var phantomSizes = [30,50,150,200,400,750];
+		//var phantomSizes = [0,20,60];
+
+		for (var index = 0 ; index < phantomSizes.length ; index++) {
+
+			// for journal index
+			data[journalIndex].values.push({
+				x: 0,
+				y: 0,
+				size: phantomSizes[index],
+				shape: shapes[0]
+			});
+
+			// for conference / Book index
+			data[confIndex].values.push({
+				x: 0,
+				y: 0,
+				size: phantomSizes[index],
+				shape: shapes[2]
+			});
+
+			// for patent index
+			data[patentIndex].values.push({
+				x: 0,
+				y: 0,
+				size: phantomSizes[index],
+				shape: shapes[1]
+			});
+
+		}
+	}
+
+	return data;
+}
+
+function startPublicationLinePlot()
+{
+	var citationLineChartLabels = ['0','10','100','1000','10000'];
+
+	nv.addGraph(function() {
+		var linechart = nv.models.lineChart()
+		.margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
+		.margin({right: 50})
+		.useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
+		.transitionDuration(350)  //how fast do you want the lines to transition?
+		.showLegend(true)       //Show the legend, allowing users to turn on/off line series.
+		.showYAxis(true)        //Show the y-axis
+		.showXAxis(true);        //Show the x-axis
+		//.xDomain([minYear, currentYear])
+		//.yDomain([-4.7, 4])
+		
+		// linechart.tooltipContent(function(key, x, y, e) {
+		//  if( key == 'NSF funding')
+		//      return '<p>' + nsf_details_by_year[e.pointIndex] + '</p>';
+		//  else if( key == 'NIH funding')
+		//      return '<p>' + nih_details_by_year[e.pointIndex] + '</p>';
+		//  else if( key == 'Total funding')
+		//      return null;// '<p>' + total_details_by_year[e.pointIndex] + '</p>';
+		// });
+
+
+		linechart.legend.margin({top: 30});
+		// linechart.lines.interactive(true); // hover information
+
+		linechart.xAxis     //Chart x-axis settings
+		.axisLabel('Rank order of publications')
+		.tickFormat(function(d) { return d + 1; });
+
+		linechart.yAxis     //Chart y-axis settings
+		.axisLabel('Number of citations');
+		// .tickFormat(function(d) { return (labels[d+4]) });
+
+		/* Done setting the chart up? Time to render it!*/
+		var myData = getLineChartData();   //You need data...
+
+		if( author )
+			linechart.noData('No funding comparison available');//for ' + author);
+
+		if( isLogScale == true )
+		{
+			linechart.yDomain([-0.3,4.3]);
+			linechart.yAxis.axisLabel('Number of citations [Log\u2081\u2080 scale]');
+			linechart.yAxis.tickFormat(d3.format('.02f'));
+		}
+		else
+		{
+			linechart.yDomain([0, max_citation]);
+			linechart.yAxis.axisLabel('Number of citations')
+			linechart.yAxis.tickFormat(d3.format('d'));
+		}
+
+
+		// d3.select('#plot_journal svg')    //Select the <svg> element you want to render the chart in.
+		// .datum(myData)         //Populate the <svg> element with chart data...
+		// .call(linechart);          //Finally, render the chart!
+
+		
+		d3.select('#plot_journal_comparison svg')
+		.datum(myData)         //Populate the <svg> element with chart data...
+		.call(linechart)          //Finally, render the chart!
+		.append("text")
+		.attr("id", "titleText")
+		.attr("x", (window.innerWidth/2))
+		.attr("y", 20)
+		.attr("text-anchor", "middle")
+		.style("font-size", "22px")
+		.text("Comparison between " + g_dataPrimary.author_fullname +" and " +  g_dataSecondary.author_fullname);
+
+
+
+		//Update the chart when window resizes.
+		nv.utils.windowResize(function() {
+			linechart.update();
+
+			d3.select("#titleText").remove();
+			d3.select('#plot_journal_comparison svg')
+			.datum(myData)         //Populate the <svg> element with chart data...
+			.call(linechart)          //Finally, render the chart!
+			.append("text")
+			.attr("id", "titleText")
+			.attr("x", (window.innerWidth/2))
+			.attr("y", 20)
+			.attr("text-anchor", "middle")
+			.style("font-size", "22px")
+			.text("Comparison between " + g_dataPrimary.author_fullname +" and " +  g_dataSecondary.author_fullname);
+
+		 });
+
+		return linechart;
+	});
+
+	d3.select('#switch')
+	.on("click", function() {
+
+		refreshPlots();
+
+		if( isLogScale == false )
+		{
+			isLogScale = true;
+			$("#switch").html("<input type=radio name=scale value=log checked> Log<sub>10</sub> <input type=radio name=scale value=decimal> Decimal");
+		}
+		else
+		{
+			isLogScale = false;
+			$("#switch").html("<input type=radio name=scale value=log> Log<sub>10</sub> <input type=radio name=scale value=decimal checked> Decimal");
+		}
+
+		startPublicationLinePlot();
+
+	});
+
+
+	
+	// $.unblockUI();
+	//$.growlUI('Notification', 'Successfully!');
+}
+
+function startFundingLinePlot()
+{
+
+	labels = ['0.06','0.12','0.25','0.5','1','2','4','8','16'];
+
+	nv.addGraph(function() {
+		var linechart = nv.models.lineChart()
+		.margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
+		.margin({right: 50})
+		.useInteractiveGuideline(false)  //We want nice looking tooltips and a guideline!
+		.transitionDuration(350)  //how fast do you want the lines to transition?
+		.showLegend(true)       //Show the legend, allowing users to turn on/off line series.
+		.showYAxis(true)        //Show the y-axis
+		.showXAxis(true)        //Show the x-axis
+		//.xDomain([minYear, currentYear])
+		.yDomain([-4.7, 4])
+		.tooltipContent(function(key, x, y, e) {
+
+			idxPrimary = e.pointIndex >= sorted_total_fund_million_Primary.length ? sorted_total_fund_million_Primary.length - 1 : e.pointIndex;
+			idxSecondary = e.pointIndex >= sorted_total_fund_million_Secondary.length ? sorted_total_fund_million_Secondary.length - 1 : e.pointIndex;
+
+			displayFundPrimary = (sorted_total_fund_million_Primary[idxPrimary] == undefined) ? "" : sorted_total_fund_million_Primary[idxPrimary].y;
+			displayFundSecondary = (sorted_total_fund_million_Secondary[idxSecondary] == undefined) ? "" : sorted_total_fund_million_Secondary[idxSecondary].y
+
+			idx = (idxPrimary > idxSecondary) ? idxPrimary : idxSecondary;
+
+			return '<div class=nvtooltip xy-tooltip nv-point-events-none>'
+			+ '<table class=nv-point-events-none>'
+			+ '<tr class="nv-pointer-events-none"><td colspan="3" class="nv-pointer-events-none"><strong class="x-value">' + (idx+1) + '</strong></td></tr>'
+			+ '<tr class=nv-point-events-none>'
+			+ '<td class="legend-color-guide nv-pointer-events-none"><div style="background-color: rgb(255, 0, 0);" class="nv-pointer-events-none"></div></td>'
+			// + '<td class=legend-color-guide nv-point-events-none><div style="background-color: rgb(255, 0, 0);" class="nv-pointer-events-none"></div></td>'
+			+ '<td class=key nv-point-events-none>' + g_dataPrimary.author_fullname + '</td>'
+			+ '<td class=value nv-point-events-none>' + displayFundPrimary + '</td>'
+			+ '</tr>'
+			+ '<tr class=nv-point-events-none>'
+			+ '<td class="legend-color-guide nv-pointer-events-none"><div style="background-color: rgb(51, 204, 255);" class="nv-pointer-events-none"></div></td>'
+			// + '<td class=legend-color-guide nv-point-events-none><div style="background-color: rgb(51, 204, 255);" class="nv-pointer-events-none"></div>/td>'
+			+ '<td class=key nv-point-events-none>' + g_dataSecondary.author_fullname + '</td>'
+			+ '<td class=value nv-point-events-none>' + displayFundSecondary + '</td>'
+			+ '</tr>'
+			+ '</table></div>'
+		// return html;
+			// return '<p>' + g_dataPrimary.author_fullname + ' <b>' + nsf_summary[e.pointIndex].SumOfYear + '</b><br/>'
+					// + g_dataSecondary.author_fullname + ' <b>' + nsf_summary2[e.pointIndex].SumOfYear + '</b></p>';
+		});
+
+
+
+		// linechart.tooltipContent(function(key, x, y, e) {
+		// 	return '<p>' + sorted_total_fund_log2_Primary[e.pointIndex] + '</p>';
+		// });
+
+		linechart.legend.margin({top: 30});
+		// linechart.lines.interactive(true); // hover information
+
+		linechart.xAxis     //Chart x-axis settings
+		.axisLabel('Rank order of anuual funding')
+		.tickFormat(function(d) { return d + 1; });
+
+
+		linechart.yAxis     //Chart y-axis settings
+		.axisLabel('Funding (Million $) [Log\u2082 scale]')
+		.tickFormat(function(d) { return (labels[d+4]) });
+		// .tickFormat(d3.format('.02f'));
+
+		/* Done setting the chart up? Time to render it!*/
+		var fundData = getFundingLineChartData();   //You need data...
+
+		// if( myData[0].values.length == 0 )
+		{
+			if( author )
+				linechart.noData('No funding comparison available');
+		}
+
+
+		d3.select('#plot_funding_comparison svg')     //Select the <svg> element you want to render the chart in.
+		.datum(fundData)         //Populate the <svg> element with chart data...
+		.call(linechart);          //Finally, render the chart!
+
+
+		//Update the chart when window resizes.
+		nv.utils.windowResize(function() { linechart.update() });
+		return linechart;
+	});
+
+	// $.unblockUI();
+	//$.growlUI('Notification', 'Successfully!');
+}
+
+function requestNSFFundingJSONP()
+{
+	author = g_dataSecondary.author_fullname;
+	var splitAuthorName = author.split(" ");
+	var firstname = splitAuthorName[0];
+	var normFund = "";
+	var lastname = "";
+	var middleInitial = ""
+
+	nsf_dataMillionPrimary = [];
+	nsf_dataMillionSecondary = [];
+
+	if( splitAuthorName.length > 1 ) {
+		lastname = splitAuthorName[ splitAuthorName.length - 1 ];
+	}
+
+	if( splitAuthorName.length > 2 ) {
+		middleInitial = (splitAuthorName[ splitAuthorName.length - 2 ]).substring(0, 1);
+	}
+
+	// Get Total Amount of NSF Funding
+	var jsonURLNSF = "./src/nsf.php?firstname=" + firstname + "&middleInitial=" + middleInitial + "&lastname=" + lastname;
+
+	nsf_data = [];
+	nsf_details_by_year = [];
+
+	$.getJSON(jsonURLNSF,'jsoncallback=?',function(res){
+		
+		if( res.Summary != null )
+		{
+			nsf_summary = [];
+
+			for( var i = 0, j = 0; i < res.Summary.length ; i ++ )
+			{
+				if ( res.Summary[i].Year >= minYearSecondary )
+				{
+					nsf_summary.push(res.Summary[i]);
+					j++;
+				}
+			}
+
+			for (var i = 0 ; i < nsf_summary.length ; i++)
+			{
+				if( nsf_summary[i].Year >= minYearSecondary )
+				{
+					normFund = log2(parseFloat(nsf_summary[i].SumOfYear));
+					nsf_data.push({x: nsf_summary[i].Year, y: normFund });
+
+					millionFund = parseFloat(nsf_summary[i].SumOfYear);
+					nsf_dataMillionSecondary.push({x: nsf_summary[i].Year, y: millionFund });
+				}
+			}
+
+			// get details
+
+			nsf_details = res.Details;
+			currentTempYear = nsf_summary[0].Year;
+			push_details = "";
+			temp = "";
+
+			for( var idx=0 ; idx < nsf_details.length ; idx++ )
+			{
+				if( nsf_details[idx].Year >= minYearSecondary )
+				{
+					temp = "Year: " + nsf_details[idx].Year +
+					"<br>Award ID: " + nsf_details[idx].AwardID +
+					"<br>" + nsf_details[idx].AwardAmount + 
+					"<br>Role: " + nsf_details[idx].Role +
+					"<br><br>";
+
+					if( currentTempYear == nsf_details[idx].Year )
+					{
+						push_details = push_details.concat(temp);
+					}
+					else
+					{
+						nsf_details_by_year.push(push_details);
+						push_details = temp;
+						currentTempYear = nsf_details[idx].Year;
+					}
+				}
+
+			}
+			nsf_details_by_year.push(push_details); // the ladt entry should be pushed
+		}
+
+		// get funding details of second author - here it is default Dr. Pavlidis
+
+		author = g_dataPrimary.author_fullname;
+		var splitAuthorName = author.split(" ");
+		var firstnameSecondary =    splitAuthorName[0];
+		var normFund = "";
+		var lastnameSecondary = "";
+		var middleInitialSecondary =    ""
+
+		if( splitAuthorName.length > 1 ) {
+			lastnameSecondary = splitAuthorName[    splitAuthorName.length - 1 ];
+		}
+
+		if( splitAuthorName.length > 2 ) {
+			middleInitialSecondary =    (splitAuthorName[ splitAuthorName.length - 2 ]).substring(0, 1);
+		}
+
+		var jsonURLNSF2 = "./src/nsf.php?firstname=" + firstnameSecondary + "&middleInitial=" + middleInitialSecondary + "&lastname=" + lastnameSecondary;
+
+		nsf_dataPrimary = [];
+
+		$.getJSON(jsonURLNSF2,'jsoncallback=?',function(res){
+
+			if( res.Summary != null )
+			{
+				nsf_summary2 = [];
+
+				for( var i = 0, j = 0; i < res.Summary.length ; i ++ )
+				{
+					if ( res.Summary[i].Year >= minYearPrimary )
+					{
+						nsf_summary2.push(res.Summary[i]);
+						j++;
+					}
+				}
+				for (var i = 0 ; i < nsf_summary2.length ; i++)
+				{
+					if( nsf_summary2[i].Year >= minYearPrimary )
+					{
+						normFund = log2(parseFloat(nsf_summary2[i].SumOfYear));
+						nsf_dataPrimary.push({x: nsf_summary2[i].Year, y: normFund });
+
+						millionFund = parseFloat(nsf_summary2[i].SumOfYear);
+						nsf_dataMillionPrimary.push({x: nsf_summary2[i].Year, y: millionFund });
+					}
+				}
+
+				// get details
+
+				nsf_details = res.Details;
+				currentTempYear = nsf_summary2[0].Year;
+				push_details = "";
+				temp = "";
+
+				for( var idx=0 ; idx < nsf_details.length ; idx++ )
+				{
+					if( nsf_details[idx].Year >= minYearPrimary )
+					{
+						temp = "Year: " + nsf_details[idx].Year +
+						"<br>Award ID: " + nsf_details[idx].AwardID +
+						"<br>" + nsf_details[idx].AwardAmount + 
+						"<br>Role: " + nsf_details[idx].Role +
+						"<br><br>";
+
+						if( currentTempYear == nsf_details[idx].Year )
+						{
+							push_details = push_details.concat(temp);
+						}
+						else
+						{
+							nsf_details_by_year.push(push_details);
+							push_details = temp;
+							currentTempYear = nsf_details[idx].Year;
+						}
+					}
+
+				}
+				nsf_details_by_year.push(push_details); // the ladt entry should be pushed
+			}
+
+			requestNIHFundingJSONP(firstname, middleInitial, lastname, firstnameSecondary, middleInitialSecondary, lastnameSecondary);
+		});
+
+	});
+
+}
+
+
+function requestNIHFundingJSONP(firstname, middleInitial, lastname, firstnameSecondary, middleInitialSecondary, lastnameSecondary)
+{
+	// Get Total Amount of NIH Funding
+
+	nih_data = [];
+	nih_details_by_year = [];
+	total_fund = [];
+	total_details_by_year = [];
+	nih_dataMillionPrimary = [];
+	nih_dataMillionSecondary = [];
+
+	var jsonURLNIH = "./src/nih.php?firstname=" + firstname + "&middleInitial=" + middleInitial + "&lastname=" + lastname;
+
+	$.getJSON(jsonURLNIH,'jsoncallback=?',function(res){
+		nih_summary = res.Summary;
+		if( nih_summary != null )
+		{
+
+			for (var i = 0 ; i < nih_summary.length ; i++)
+			{
+				if( nih_summary[i].Year < minYear )
+					continue;
+
+				normFund = log2(parseFloat(nih_summary[i].SumOfYear));
+				nih_data.push({x: nih_summary[i].Year, y: normFund, shape: 'cross' });
+
+				millionFund = parseFloat(nih_summary[i].SumOfYear);
+				nih_dataMillionSecondary.push({x: nih_summary[i].Year, y: millionFund });
+
+			}
+
+			// get details
+
+			nih_details = res.Details;
+			currentTempYear = nih_details[0].Year;;
+			var push_details = "";
+			var temp = "";
+
+			for (var idx=0 ; idx < nih_details.length ; idx++ )
+			{
+
+				if( nih_details[idx].Year < minYear )
+				{
+//                  currentTempYear = nih_details[idx+1].Year;
+//                  continue;
+				}
+
+				temp = "Year: " + nih_details[idx].Year + "<br>Award ID: " + nih_details[idx].AwardID + "<br>" + nih_details[idx].AwardAmount + "<br>Role: " + nih_details[idx].Role + "<br><br>";
+
+
+				if( currentTempYear == nih_details[idx].Year )
+				{
+					push_details = push_details.concat(temp);
+				}
+				else
+				{
+					nih_details_by_year.push(push_details);
+
+					push_details = temp;
+					currentTempYear = nih_details[idx].Year;
+				}
+
+			}
+
+			nih_details_by_year.push(push_details);
+		}
+
+		var jsonURLNIH2 = "./src/nih.php?firstname=" + firstnameSecondary + "&middleInitial=" + middleInitialSecondary + "&lastname=" + lastnameSecondary;
+
+		nih_dataPrimary = [];
+		nih_dataMillionPrimary = [];
+
+		$.getJSON(jsonURLNIH2,'jsoncallback=?',function(res2){
+			nih_summary2 = res2.Summary;
+			if( nih_summary2 != null )
+			{
+				for (var i = 0 ; i < nih_summary2.length ; i++)
+				{
+					if( nih_summary2[i].Year < minYear )
+						continue;
+
+					normFund = log2(parseFloat(nih_summary2[i].SumOfYear));
+					nih_dataPrimary.push({x: nih_summary2[i].Year, y: normFund });
+
+					millionFund = parseFloat(nih_summary2[i].SumOfYear);
+					nih_dataMillionPrimary.push({x: nih_summary2[i].Year, y: millionFund });
+
+				}
+			}
+
+			totalSumFundingPrimary();
+			totalSumFundingSecondary();
+
+		});
+
+	});
+}
+
+function totalSumFundingPrimary()
+{
+	total_fund_log2_Primary = [];
+	total_fund_million_Primary = [];
+	sorted_total_fund_log2_Primary = [];
+	sorted_total_fund_million_Primary = [];
+	// get total fund
+	if( nih_dataPrimary.length == 0 ){
+		total_fund_log2_Primary = nsf_dataPrimary;
+		total_fund_million_Primary = nsf_dataMillionPrimary;
+	}
+	else if ( nsf_dataPrimary.length == 0 ){
+		total_fund_log2_Primary = nih_dataPrimary;
+		total_fund_million_Primary = nih_dataMillionPrimary;
+	}
+	else
+	{
+
+		var nsf_idx = 0;
+		var nsf_idx2 = 0;
+		var nih_idx = 0;
+		var nih_idx2 = 0;
+		var sum = 0;
+
+		while( nsf_idx < nsf_dataPrimary.length && nih_idx < nih_dataPrimary.length )
+		{
+			if ( nsf_summary2[nsf_idx].Year < minYear )
+			{
+				nsf_idx++;
+				continue;
+			}
+			else if ( nih_summary2[nih_idx].Year < minYear )
+			{
+				nih_idx++;
+				continue;
+			}
+
+
+			if( nsf_summary2[nsf_idx].Year < nih_summary2[nih_idx].Year )
+			{
+				total_fund_log2_Primary.push({ x: nsf_dataPrimary[nsf_idx2].x, y: nsf_dataPrimary[nsf_idx2].y });
+				total_fund_million_Primary.push({ x: nsf_summary2[nsf_idx2].Year, y: parseFloat(nsf_summary2[nsf_idx2].SumOfYear) });
+				// total_fund_log2_Primary.push('NSF<br>' + nsf_dataPrimary[nsf_idx]);
+				nsf_idx++;
+				nsf_idx2++;
+			}
+			else if( nsf_summary2[nsf_idx].Year > nih_summary2[nih_idx].Year )
+			{
+				total_fund_log2_Primary.push({ x: nih_dataPrimary[nih_idx2].x, y: nih_dataPrimary[nih_idx2].y });
+				total_fund_million_Primary.push({ x: nih_summary2[nih_idx2].Year, y: parseFloat(nih_summary2[nih_idx2].SumOfYear) });
+				// total_fund_log2_Primary.push('NIH<br>' + nih_dataPrimary[nih_idx]);
+				nih_idx++;
+				nih_idx2++;
+			}
+			else
+			{
+				sum = log2(parseFloat(nsf_summary2[nsf_idx].SumOfYear) + parseFloat(nih_summary2[nih_idx].SumOfYear));
+				total_fund_log2_Primary.push({ x: nih_summary2[nih_idx].Year, y: sum});
+
+				sum_million = parseFloat(nsf_summary2[nsf_idx].SumOfYear) + parseFloat(nih_summary2[nih_idx].SumOfYear);
+				total_fund_million_Primary.push({ x: nih_summary2[nih_idx].Year, y: sum_million});
+
+				// var temp_combined_details = '<b>NSF</b><br/>' + nsf_dataPrimary[nsf_idx] + '<b>NIH</b><br/>' + nih_dataPrimary[nih_idx];
+				// total_fund_log2_Primary.push( temp_combined_details );
+
+				nsf_idx++;
+				nsf_idx2++;
+
+				nih_idx++;
+				nih_idx2++;
+			}
+
+		}
+
+
+		while( nsf_idx2 < nsf_dataPrimary.length )
+		{
+			total_fund_log2_Primary.push({ x: nsf_dataPrimary[nsf_idx2].x, y: nsf_dataPrimary[nsf_idx2].y });
+			total_fund_million_Primary.push({ x: nsf_summary2[nsf_idx2].Year, y: parseFloat(nsf_summary2[nsf_idx2].SumOfYear) });
+			// total_fund_log2_Primary.push('NSF<br>' + nsf_dataPrimary[nsf_idx]);
+			nsf_idx2++;
+		}
+
+		while( nih_idx2 < nih_dataPrimary.length )
+		{
+			total_fund_log2_Primary.push({ x: nih_dataPrimary[nih_idx2].x, y: nih_dataPrimary[nih_idx2].y });
+			total_fund_million_Primary.push({ x: nih_summary2[nih_idx2].Year, y: parseFloat(nih_summary2[nih_idx2].SumOfYear) });
+			// total_fund_log2_Primary.push('NIH<br>' + nih_dataPrimary[nih_idx]);
+			nih_idx2++;
+		}
+
+	}
+
+	// get a temporary sorting
+	var tempTotalfundlog2Primary = total_fund_log2_Primary.sort(function(a,b) {
+		return b.y - a.y ;
+	});
+	// store the data with required 'x' and 'y' values for plot
+	for( var i = 0 ; i < tempTotalfundlog2Primary.length; i++ ) {
+		sorted_total_fund_log2_Primary.push({ x: i, y: tempTotalfundlog2Primary[i].y });
+	}
+
+	var tempTotalfundMillionPrimary = total_fund_million_Primary.sort(function(a,b) {
+		return b.y - a.y ;
+	});
+	for( var i = 0 ; i < tempTotalfundMillionPrimary.length; i++ ) {
+		sorted_total_fund_million_Primary.push({ x: i, y: (tempTotalfundMillionPrimary[i].y).toFixed(2) });
+	}
+
+}
+
+function totalSumFundingSecondary()
+{
+	total_fund_log2_Secondary = [];
+	total_fund_million_Secondary = [];
+	sorted_total_fund_log2_Secondary = [];
+	sorted_total_fund_million_Secondary = [];
+
+	// get total fund
+
+	if( nih_data.length == 0 ){
+		total_fund_log2_Secondary = nsf_data;
+		total_fund_million_Secondary = nsf_dataMillionSecondary;
+	}
+	else if ( nsf_data.length == 0 ){
+		total_fund_log2_Secondary = nih_data;
+		total_fund_million_Secondary = nih_dataMillionSecondary;
+
+	}
+	else
+	{
+
+		var nsf_idx = 0;
+		var nsf_idx2 = 0;
+		var nih_idx = 0;
+		var nih_idx2 = 0;
+		var sum = 0;
+
+		while( nsf_idx < nsf_data.length && nih_idx < nih_data.length )
+		{
+			if ( nsf_summary[nsf_idx].Year < minYear )
+			{
+				nsf_idx++;
+				continue;
+			}
+			else if ( nih_summary[nih_idx].Year < minYear )
+			{
+				nih_idx++;
+				continue;
+			}
+
+
+			if( nsf_summary[nsf_idx].Year < nih_summary[nih_idx].Year )
+			{
+				total_fund_log2_Secondary.push({ x: nsf_data[nsf_idx2].x, y: nsf_data[nsf_idx2].y });
+				total_fund_million_Secondary.push({ x: nsf_summary[nsf_idx2].Year, y: parseFloat(nsf_summary[nsf_idx2].SumOfYear) });
+				// total_details_by_year.push('NSF<br>' + nsf_details_by_year[nsf_idx]);
+				nsf_idx++;
+				nsf_idx2++;
+			}
+			else if( nsf_summary[nsf_idx].Year > nih_summary[nih_idx].Year )
+			{
+				total_fund_log2_Secondary.push({ x: nih_data[nih_idx2].x, y: nih_data[nih_idx2].y });
+				total_fund_million_Secondary.push({ x: nih_summary[nih_idx2].Year, y: parseFloat(nih_summary[nih_idx2].SumOfYear) });
+				// total_details_by_year.push('NIH<br>' + nih_details_by_year[nih_idx]);
+				nih_idx++;
+				nih_idx2++;
+			}
+			else
+			{
+				sum = log2(parseFloat(nsf_summary[nsf_idx].SumOfYear) + parseFloat(nih_summary[nih_idx].SumOfYear));
+				total_fund_log2_Secondary.push({ x: nih_summary[nih_idx].Year, y: sum});
+
+				sum_million = parseFloat(nsf_summary[nsf_idx].SumOfYear) + parseFloat(nih_summary[nih_idx].SumOfYear);
+				total_fund_million_Secondary.push({ x: nih_summary[nih_idx].Year, y: sum_million});
+
+				// var temp_combined_details = '<b>NSF</b><br/>' + nsf_details_by_year[nsf_idx] + '<b>NIH</b><br/>' + nih_details_by_year[nih_idx];
+				// total_fund_log2_Secondary.push( temp_combined_details );
+
+				nsf_idx++;
+				nsf_idx2++;
+
+				nih_idx++;
+				nih_idx2++;
+			}
+
+		}
+
+
+		while( nsf_idx2 < nsf_data.length )
+		{
+			total_fund_log2_Secondary.push({ x: nsf_data[nsf_idx2].x, y: nsf_data[nsf_idx2].y })
+			total_fund_million_Secondary.push({ x: nsf_summary[nsf_idx2].Year, y: parseFloat(nsf_summary[nsf_idx2].SumOfYear) });
+			// total_details_by_year.push('NSF<br>' + nsf_details_by_year[nsf_idx]);
+			nsf_idx2++;
+		}
+
+		while( nih_idx2 < nih_data.length )
+		{
+			total_fund_log2_Secondary.push({ x: nih_data[nih_idx2].x, y: nih_data[nih_idx2].y })
+			total_fund_million_Secondary.push({ x: nih_summary[nih_idx2].Year, y: parseFloat(nih_summary[nih_idx2].SumOfYear) });
+			// total_details_by_year.push('NIH<br>' + nih_details_by_year[nih_idx]);
+			nih_idx2++;
+		}
+
+	}
+
+	// get a temporary sorting
+	var tempTotalFund = total_fund_log2_Secondary.sort(function(a,b) {
+		return b.y - a.y ;
+	});
+
+	// store the data with required 'x' and 'y' values for plot
+	for( var i = 0 ; i < tempTotalFund.length; i++ ) {
+		sorted_total_fund_log2_Secondary.push({ x: i, y: tempTotalFund[i].y });
+	}
+
+	var tempTotalfundMillionSecondary = total_fund_million_Secondary.sort(function(a,b) {
+		return b.y - a.y ;
+	});
+
+	// store the data with required 'x' and 'y' values for plot
+	for( var i = 0 ; i < tempTotalfundMillionSecondary.length; i++ ) {
+		sorted_total_fund_million_Secondary.push({ x: i, y: (tempTotalfundMillionSecondary[i].y).toFixed(2) });
+	}
+
+	dfd.resolve();
+	$.unblockUI();
+
+	// Clear the 'gid' and 'displayname'
+	document.searchFormSecondary.gid.value =    "";
+	document.searchFormSecondary.displayname.value =    "";
+	document.searchFormSecondary.gidSecondary.value =   "";
+	document.searchFormSecondary.displaynameSecondary.value =   "";
+	$("#displaynameSecondary").prop('disabled', true);
+
+	document.getElementById("save_as_svg").style.display = "block";
+}
+
+
+function getLineChartData() {
+
+	var logdataSecondary = [];
+	var logdataPrimary = [];
+	var dataSecondary, dataPrimary;
+
+	if(isLogScale == true)
+	{
+		for( var i = 0 ; i < compare_dataSecondary.length; i++)
+			logdataSecondary.push({x: compare_dataSecondary[i].x, y: log10(compare_dataSecondary[i].y)})
+		for( var i = 0 ; i < compare_dataPrimary.length; i++)
+			logdataPrimary.push({x: compare_dataPrimary[i].x, y: log10(compare_dataPrimary[i].y)})
+
+		dataSecondary = logdataSecondary;
+		dataPrimary = logdataPrimary;
+	}
+	else
+	{
+		dataSecondary = compare_dataSecondary;
+		dataPrimary = compare_dataPrimary;
+	}
+
+	//Line chart data should be sent as an array of series objects.
+	return [
+	{
+		values: dataPrimary,
+		key: g_dataPrimary.author_fullname,
+		color: '#ff0000'
+	},
+	{
+		values: dataSecondary,      //values - represents the array of {x,y} data points
+		key: g_dataSecondary.author_fullname, //key  - the name of the series.
+		color: '#33ccff'  //color - optional: choose your own line color.
+	}
+
+	];
+}
+
+function getFundingLineChartData() {
+
+	var dataFundingPrimary = [], dataFundingSecondary = [];
+
+	// compare_dataPrimary = [];
+	
+	// for(i = 0; i < sorted_total_fund_log2_Primary.length; i++)
+	// {
+	// 	dataFundingPrimary.push({x: i, y: parseFloat(sorted_total_fund_log2_Primary[i].y)});
+	// }
+
+	// for(i = 0; i < sorted_total_fund_log2_Secondary.length; i++)
+	// {
+	// 	dataFundingSecondary.push({x: i, y: parseFloat(sorted_total_fund_log2_Secondary[i].y)});
+	// }
+
+	// dataPrimary = compare_dataPrimary;
+	// dataSecondary = compare_dataSecondary;
+
+	//Line chart data should be sent as an array of series objects.
+	return [
+	{
+		values: sorted_total_fund_log2_Primary,
+		key: g_dataPrimary.author_fullname,
+		color: '#ff0000'
+	},
+	{
+		values: sorted_total_fund_log2_Secondary,      //values - represents the array of {x,y} data points
+		key: g_dataSecondary.author_fullname, //key  - the name of the series.
+		color: '#33ccff'  //color - optional: choose your own line color.
+	}
+
+	];
+}
+
+</script>
+
+
+<!-- Download files as SVG -->
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		$("#save_as_svg").click(function() {
+			download_svg(2);
+		});
+	});
+
+
+</script>
+<!-- End of Download files as SVG -->
+
+
+
+
+
+
+<script type="text/javascript">
+// $(document).ready(function() {
+
+// //  $('.popup').css({ opacity: 0 });
+// //  $('.dialog').css({ opacity: 1 });
+// 	// $('.dialog').hide();
+
+
+// 	$('.form-container').submit(function() {
+// 		if(!$('.form-container .search-field').val() || $('.form-container .search-field').val() == "Type search text here..." || $('.form-container .search-field').val().length < 5 || $('#gidSecondary').val().length != 12 ) {
+// 			$('#name_list_id_Secondary').hide();
+// 			$('input[name="gname"]').val(document.searchFormSecondary.displaynameSecondary.value);
+// 			// $('.dialog').hide();
+// 			// $('.dialog').slideToggle();
+
+// //          $('.dialog').css({ opacity: 0 });
+// //          $('.dialog').animate(
+// //              { opacity: 1 },
+// //              {
+// //                  duration: 'slow',
+// //                  easing: 'easeOutBounce'
+// //              });
+// 			return false;
+// 		} else {
+
+// 			$.blockUI({ css: {
+// 				border: 'none',
+// 				padding: '15px',
+// 				backgroundColor: '#fff',
+// 				'-webkit-border-radius': '10px',
+// 				'-moz-border-radius': '10px',
+// 				opacity: .7,
+// 				color: '#000'
+// 				},
+// 				message: $('#blockMessage')
+// 			});
+
+
+// 		}
+
+// 	});
+
+// 	$('.form-container .search-field').focus(function() {
+// 		if($(this).val() == "Type search text here...") {
+// 			this.value = "";
+// 		}
+// 	});
+
+// 	$('.form-container .search-field').keydown(function() {
+// //      $('.popup').css({ opacity: 0 });
+// 		// $('.dialog').hide();
+// 	});
+
+
+// 	$(document).keypress(
+// 		function(event){
+// 		 if (event.which == '13') {
+// 			event.preventDefault();
+// 		  }
+
+
+// 	});
+
+// });
+</script>
+
+
+	<!-- Piwik -->
+	<script type="text/javascript">
+	  var _paq = _paq || [];
+	  _paq.push(['trackPageView']);
+	  _paq.push(['enableLinkTracking']);
+	  (function() {
+	    var u="//kyeongan.cpl.uh.edu/projects/piwik/";
+	    _paq.push(['setTrackerUrl', u+'piwik.php']);
+	    _paq.push(['setSiteId', 1]);
+	    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+	    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+	  })();
+	</script>
+	<noscript><p><img src="//kyeongan.cpl.uh.edu/projects/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+	<!-- End Piwik Code -->
+
+</body>
