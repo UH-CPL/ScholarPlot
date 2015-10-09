@@ -2,7 +2,7 @@
 Visualize a scholar's accomplishments at a glance!
 
 ## Supported Browsers
-NVD3 runs best on WebKit based browsers.
+Scholar Plot runs best on following browsers.
 
 * Google Chrome: latest version
 * Opera 15+ (i.e. webkit version)
