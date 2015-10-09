@@ -5,10 +5,10 @@ Visualize a scholar's accomplishments at a glance!
 Scholar Plot runs best on following browsers.
 
 * Google Chrome: latest version
-* Opera 15+ (i.e. webkit version)
 * Safari: latest version
 * Firefox: latest version
 * Internet Explorer: 10+
+* Opera 15+
 
 ## Changelog
 
