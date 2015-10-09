@@ -1,5 +1,5 @@
 ## ScholarPlot
-
+Visualize a scholar's accomplishments at a glance!
 
 ## Supported Browsers
 NVD3 runs best on WebKit based browsers.
@@ -12,7 +12,7 @@ NVD3 runs best on WebKit based browsers.
 
 ## Changelog
 
-** 10/09/2015 ** Changes:
+**10/09/2015** Changes:
 
 * Fixed Hang on invalid URLs.
 * Fixed Triangle size bug.
