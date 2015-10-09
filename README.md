@@ -1,4 +1,4 @@
-## ScholarPlot
+## Scholar Plot
 Visualize a scholar's accomplishments at a glance!
 
 ## Supported Browsers
