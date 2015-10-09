@@ -17,7 +17,7 @@ NVD3 runs best on WebKit based browsers.
 * Fixed Hang on invalid URLs.
 * Fixed Triangle size bug.
 * Fixed Special characters issues on all browsers.
-* Updated JCR database
+* Updated JCR database.
 * 2013 JCR 8812
 * 2014 JCR 11867 (3055 more)
 * 35% increase in the number of journals
