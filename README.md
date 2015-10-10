@@ -50,3 +50,9 @@ Scholar Plot runs best on following browsers.
 * Sort by publication count
 * Sort by name
 * Display max 7 authors
+
+
+**2014** Changes:
+
+* Initial Release
+
