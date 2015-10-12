@@ -1,4 +1,4 @@
-## Scholar Plot - Funding dataset explained!
+## Funding dataset explained!
 
 ## NSF
 National Science Foundation
