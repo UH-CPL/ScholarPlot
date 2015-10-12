@@ -53,7 +53,18 @@ Scholar Plot runs best on following browsers.
 * Sort by name
 * Display max 7 authors
 
+**04/24/2014** Changes:
 
-**2014** Changes:
+* Initial Release for Web
 
-* Initial Release
+**04/24/2014** Changes:
+
+* Registered the domains (scholarplot.com, scholarplot.org)
+
+**11/2013** Changes:
+
+* ScholarPlot for iOS 6 released in Apple Store
+
+**08/2013** Changes:
+
+* Project kickoff started with iPhone version
