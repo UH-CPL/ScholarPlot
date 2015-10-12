@@ -1,10 +1,8 @@
 ## Dataset explained!
 
 ## JCR Impact Factor
-**10/12/2015** Changes:
-* 2013 JCR 8812
-* 2014 JCR 11867 (3055 more)
-* 35% increase in the number of journals.
+* 11,867 records in our database.
+* 35% increase in the number of journals compared to previous data
 
 ## NSF - National Science Foundation
 * FY 1985 - FY 2014
