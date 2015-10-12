@@ -5,8 +5,8 @@
 * 35% increase in the number of journals compared to previous data
 
 ## NSF - National Science Foundation
-* FY 1985 - FY 2014
+* FY 1985 - FY 2013
 
 
 ## NIH - National Institutes of Health
-* FY 1985 - FY 2014
+* FY 2000 - FY 2013
