@@ -1,4 +1,6 @@
 ## Scholar Plot
+![Alt text](https://cloud.githubusercontent.com/assets/5505099/10435182/e6efd28e-70e3-11e5-9e95-90fed7a29275.png "An example of ScholarPlot")
+
 Visualize a scholar's accomplishments at a glance!
 
 ## Supported Browsers
