@@ -1,4 +1,4 @@
-## Scholar Plot
+# Scholar Plot
 ![Alt text](https://cloud.githubusercontent.com/assets/5505099/10435182/e6efd28e-70e3-11e5-9e95-90fed7a29275.png "An example of ScholarPlot")
 
 Visualize a scholar's accomplishments at a glance!
@@ -61,9 +61,11 @@ Scholar Plot runs best on following browsers.
 
 * Registered the domains (scholarplot.com, scholarplot.org)
 
-**11/2013** Changes:
+
+**3/5/2014** Changes:
 
 * ScholarPlot for iOS 6 released in Apple Store
+* https://itunes.apple.com/us/app/scholar-plot/id819606976?mt=8
 
 **08/2013** Changes:
 
