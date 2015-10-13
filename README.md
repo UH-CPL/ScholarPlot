@@ -55,16 +55,13 @@ Scholar Plot runs best on following browsers.
 
 **04/24/2014** Changes:
 
+* Registered the domains (scholarplot.com, scholarplot.org)
 * Initial Release for Web
 
-**04/24/2014** Changes:
 
-* Registered the domains (scholarplot.com, scholarplot.org)
+**03/05/2014** Changes:
 
-
-**3/5/2014** Changes:
-
-* ScholarPlot for iOS 6 released in Apple Store
+* ScholarPlot v1.0 for iOS 6 released in Apple Store
 * https://itunes.apple.com/us/app/scholar-plot/id819606976?mt=8
 
 **08/2013** Changes:
