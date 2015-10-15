@@ -14,6 +14,10 @@ Scholar Plot runs best on following browsers.
 
 ## Changelog
 
+**14/09/2015** Changes:
+* Refined initial page load
+* Added Facebook API on Contact page
+
 **10/09/2015** Changes:
 
 * Fixed Hang on invalid URLs.
