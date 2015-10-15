@@ -1,5 +1,9 @@
 # Scholar Plot
-![Alt text](https://cloud.githubusercontent.com/assets/5505099/10435182/e6efd28e-70e3-11e5-9e95-90fed7a29275.png "An example of ScholarPlot")
+![Publication](https://cloud.githubusercontent.com/assets/5505099/10435182/e6efd28e-70e3-11e5-9e95-90fed7a29275.png "An example of ScholarPlot Publication")
+
+![Funding](https://cloud.githubusercontent.com/assets/5505099/10527953/f34c897e-7358-11e5-9e19-3d26dc0f19e1.png "An example of ScholarPlot Funding")
+
+
 
 Visualize a scholar's accomplishments at a glance!
 
