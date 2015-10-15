@@ -15,7 +15,6 @@
 
 #### NASA - National Aeronautics and Space Administration
 * FY 2007 - FY 2015 (9 years, 16,670 rows, 1,852/year)
-* Can download CSV for NSF and NASA
 * https://www.research.gov/research-portal/appmanager/base/desktop?_nfpb=true&_eventName=viewQuickSearchFormEvent_so_rsr
 
 ## More Agencies
@@ -29,7 +28,7 @@
 
 ## Function in Excel to split First and Last name
 FirstName
-=LEFT(F2,FIND("[",SUBSTITUTE(F2," ","[",LEN(F2)-LEN(SUBSTITUTE(F2," ",""))))-1)
+* =LEFT(F2,FIND("[",SUBSTITUTE(F2," ","[",LEN(F2)-LEN(SUBSTITUTE(F2," ",""))))-1)
 
 LastName
-=RIGHT(F2,LEN(F2)-FIND("*",SUBSTITUTE(F2," ","*",LEN(F2)-LEN(SUBSTITUTE(F2," ","")))))
+* =RIGHT(F2,LEN(F2)-FIND("*",SUBSTITUTE(F2," ","*",LEN(F2)-LEN(SUBSTITUTE(F2," ","")))))
