@@ -5,12 +5,12 @@
 * 35% increase in the number of journals compared to previous data
 
 #### NSF - National Science Foundation
-* FY 1985 - FY 2013 (29 years, 312311 rows, 10,769/year)
+* FY 1985 - FY 2013 (29 years, 312,311 rows, 10,769/year)
 * http://www.nsf.gov/awardsearch/download.jsp
 
 
 #### NIH - National Institutes of Health
-* FY 2000 - FY 2013 (14 years, 777657 rows, 55,456/year)
+* FY 2000 - FY 2013 (14 years, 777,657 rows, 55,456/year)
 * http://exporter.nih.gov/ExPORTER_Catalog.aspx
 
 #### NASA
