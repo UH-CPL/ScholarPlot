@@ -12,7 +12,7 @@
 * FY 2000 - FY 2013 (14 years, 777657 rows, 55,456/year)
 
 ### NASA
-* FY 2007 - FY 2015 (9 years, about 16,670 rows, 1,852/year)
+* FY 2007 - FY 2015 (9 years, 16,670 rows, 1,852/year)
 * Can download CSV for NSF and NASA
 * https://www.research.gov/research-portal/appmanager/base/desktop?_nfpb=true&_eventName=viewQuickSearchFormEvent_so_rsr
 
