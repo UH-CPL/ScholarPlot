@@ -23,3 +23,11 @@
 ### Department of Engergy
 ### Department of Education
 ### Department of Transforation
+
+
+## function in Excel
+FirstName
+=LEFT(F2,FIND("[",SUBSTITUTE(F2," ","[",LEN(F2)-LEN(SUBSTITUTE(F2," ",""))))-1)
+
+LastName
+=RIGHT(F2,LEN(F2)-FIND("*",SUBSTITUTE(F2," ","*",LEN(F2)-LEN(SUBSTITUTE(F2," ","")))))
