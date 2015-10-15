@@ -5,17 +5,18 @@
 * 35% increase in the number of journals compared to previous data
 
 ### NSF - National Science Foundation
-* FY 1985 - FY 2013
+* FY 1985 - FY 2013 (29 years, 312311 rows, 10,769/year)
 
 
 ### NIH - National Institutes of Health
-* FY 2000 - FY 2013
+* FY 2000 - FY 2013 (14 years, 777657 rows, 55,456/year)
 
-## More Agencies
 ### NASA
-* FY 2007 - FY 2014
+* FY 2007 - FY 2015 (9 years, about 16,670 rows, 1,852/year)
 * Can download CSV for NSF and NASA
 * https://www.research.gov/research-portal/appmanager/base/desktop?_nfpb=true&_eventName=viewQuickSearchFormEvent_so_rsr
+
+## More Agencies
 
 ### DHS
 ### DOD
