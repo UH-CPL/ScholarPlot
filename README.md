@@ -12,9 +12,14 @@ Scholar Plot runs best on following browsers.
 * Internet Explorer: 10+
 * Opera 15+
 
+## Funding dataset
+* NSF: FY 1985 - FY 2013 (29 years, 312,311 rows, 10,769/year)
+* NIH: FY 2000 - FY 2013 (14 years, 777,657 rows, 55,456/year)
+* NASA: FY 2007 - FY 2015 (9 years, 16,670 rows, 1,852/year)
+
 ## Changelog
 
-**14/09/2015** Changes:
+**10/15/2015** Changes:
 * Refined initial page load
 * Added Facebook API on Contact page
 
