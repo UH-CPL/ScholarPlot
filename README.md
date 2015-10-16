@@ -28,7 +28,7 @@ Scholar Plot runs best on following browsers.
   * Database: 'nasa_award', 'nasa_awardinvestigators`
   * Implemented nasa.php to fetch data
   * Redesigned the function for total funding amount (simpler, cleaner)
-* Added Facebook Social Plugins
+* Added Facebook Social Plugins - Like Button, Page Plugin
 * Refined initial page load (hiding the dialog box for insertion)
 
 **10/09/2015** Changes:
