@@ -23,9 +23,14 @@ Scholar Plot runs best on following browsers.
 
 ## Changelog
 
-**10/15/2015** Changes:
-* Refined initial page load
-* Added Facebook API on Contact page
+**10/16/2015** Changes:
+* Added NASA datasets: FY 2007 - FY 2015 (9 years, 16,670 rows, 1,852/year)
+  * Database: nsf_award, nsf_investigators
+  * Implemented nasa.php to fetch data
+  * Redesigned the function for total funding amount (simpler, cleaner)
+* Added Facebook Social Plugins
+* Refined initial page load (hiding the dialog box for insertion)
+* 
 
 **10/09/2015** Changes:
 
