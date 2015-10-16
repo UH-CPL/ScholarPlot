@@ -24,13 +24,12 @@ Scholar Plot runs best on following browsers.
 ## Changelog
 
 **10/16/2015** Changes:
-* Added NASA datasets: FY 2007 - FY 2015 (9 years, 16,670 rows, 1,852/year)
+* Added NASA dataset: FY 2007 - FY 2015 (9 years, 16,670 rows, 1,852/year)
   * Database: 'nasa_award', 'nasa_awardinvestigators`
   * Implemented nasa.php to fetch data
   * Redesigned the function for total funding amount (simpler, cleaner)
 * Added Facebook Social Plugins
 * Refined initial page load (hiding the dialog box for insertion)
-* 
 
 **10/09/2015** Changes:
 
