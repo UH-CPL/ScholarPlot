@@ -21,6 +21,10 @@ Scholar Plot runs best on following browsers.
 
 ## Changelog
 
+**10/18/2015** Changes:
+* Released the new version with NASA dataset and Facebook Social Plugins.
+
+
 **10/16/2015** Changes:
 * Added NASA dataset: FY 2007 - FY 2015 (9 years, 16,670 rows, 1,852/year)
 * Database tables: 'nasa_award', 'nasa_awardinvestigators`
