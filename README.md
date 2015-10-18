@@ -24,7 +24,9 @@ Scholar Plot runs best on following browsers.
 **10/18/2015** Changes:
 * Released the new version with NASA dataset and Facebook Social Plugins.
 ![Funding](https://cloud.githubusercontent.com/assets/5505099/10566490/d3210bb4-75ad-11e5-9254-856c36882df6.png "An example of ScholarPlot Funding with NASA")
-
+* ScholarPlot v1.4 relesed in iTunes Store
+* Support for iOS 9 released
+* https://itunes.apple.com/us/app/scholar-plot/id819606976?mt=8
 
 **10/16/2015** Changes:
 * Added NASA dataset: FY 2007 - FY 2015 (9 years, 16,670 rows, 1,852/year)
