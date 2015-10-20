@@ -21,6 +21,19 @@ Scholar Plot runs best on following browsers.
 
 ## Changelog
 
+**10/20/2015** Changes:
+* Redesigned the getSortedCoAuthorString prototype
+* getSortedCoAuthorString(coAuthorArray, displayCount)
+* Created two DIV pannels at bottom of Publiction plot
+* <div id="panel" class="panel" style="display:none">
+		<div id="AuthorPanel" class ='left'></div>
+		<div id="JournalPanel" class ='right'></div>
+	</div>
+* Added JSON output
+
+
+## Changelog
+
 **10/18/2015** Changes:
 * Released the new version with NASA dataset and Facebook Social Plugins.
 ![Funding](https://cloud.githubusercontent.com/assets/5505099/10566490/d3210bb4-75ad-11e5-9254-856c36882df6.png "An example of ScholarPlot Funding with NASA")
