@@ -31,9 +31,6 @@ Scholar Plot runs best on following browsers.
 	</div>`
 * Added JSON output
 
-
-## Changelog
-
 **10/18/2015** Changes:
 * Released the new version with NASA dataset and Facebook Social Plugins.
 ![Funding](https://cloud.githubusercontent.com/assets/5505099/10566490/d3210bb4-75ad-11e5-9254-856c36882df6.png "An example of ScholarPlot Funding with NASA")
