@@ -23,12 +23,12 @@ Scholar Plot runs best on following browsers.
 
 **10/20/2015** Changes:
 * Redesigned the getSortedCoAuthorString prototype
-* getSortedCoAuthorString(coAuthorArray, displayCount)
+* `getSortedCoAuthorString(coAuthorArray, displayCount)`
 * Created two DIV pannels at bottom of Publiction plot
-* <div id="panel" class="panel" style="display:none">
+* `<div id="panel" class="panel" style="display:none">
 		<div id="AuthorPanel" class ='left'></div>
 		<div id="JournalPanel" class ='right'></div>
-	</div>
+	</div>`
 * Added JSON output
 
 
