@@ -21,6 +21,12 @@ Scholar Plot runs best on following browsers.
 
 ## Changelog
 
+**10/21/2015** Changes:
+* Added a parameter in getSortedCoAuthorString to distinguish between author and journal name 
+* `getSortedCoAuthorString(coAuthorArray, displayCount, isNeedSplit)`
+* Compelted Journal Panel
+* Tried to add pie charts for better insigts
+
 **10/20/2015** Changes:
 * Redesigned the getSortedCoAuthorString prototype
 * `getSortedCoAuthorString(coAuthorArray, displayCount)`
