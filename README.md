@@ -21,6 +21,11 @@ Scholar Plot runs best on following browsers.
 
 ## Changelog
 
+**10/23/2015** Changes:
+* Finished the two panels both CoAuthors/Journals
+* Bug fixies - IEEE (upper case), Removed Null (`' '`) Authors
+
+
 **10/21/2015** Changes:
 * Added a parameter in getSortedCoAuthorString to distinguish between author and journal name 
 * `getSortedCoAuthorString(coAuthorArray, displayCount, isNeedSplit)`
