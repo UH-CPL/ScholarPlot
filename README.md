@@ -33,6 +33,7 @@ Scholar Plot runs best on following browsers.
 ** Imfact factor
 ** Last name
 * Deploy New Panels to the production server.
+* Facebook AD
 * Add UH faculties in Che, Eng, etc
 * Patent
 
