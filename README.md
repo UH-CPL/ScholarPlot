@@ -22,7 +22,7 @@ Scholar Plot runs best on following browsers.
 ## Changelog
 
 **10/23/2015** Changes:
-* Finished the two panels both CoAuthors/Journals
+* Finished new two panels both Co-Authors and Journals
 * Bug fixies - IEEE (upper case), Removed Null (`' '`) Authors
 ![Panel 1](https://cloud.githubusercontent.com/assets/5505099/10701618/130d6706-798a-11e5-8e81-b1693eeb1407.png)
 ![Panel 2](https://cloud.githubusercontent.com/assets/5505099/10701617/13096be2-798a-11e5-9af4-b1011addc56e.png)
