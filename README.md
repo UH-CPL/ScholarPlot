@@ -19,7 +19,23 @@ Scholar Plot runs best on following browsers.
 * NIH: FY 2000 - FY 2013 (14 years, 777,657 rows, 55,456/year)
 * NASA: FY 2007 - FY 2015 (9 years, 16,670 rows, 1,852/year)
 
+
+## New Ideas
+* Put servey link
+* Pie charts for better insights
+* When floating the cursor over a coauthor name, joint papers with focual author should light up to indicate the pattern and placement of coauthors papers
+* New Plot for team and department - may be useful but need to redesign
+
 ## Changelog
+
+**10/xx/2015** Changes:
+* Ordering
+** Imfact factor
+** Last name
+* Deploy New Panels to the production server.
+* Add UH faculties in Che, Eng, etc
+* Patent
+
 
 **10/23/2015** Changes:
 * Finished new two panels both Co-Authors and Journals
@@ -28,10 +44,12 @@ Scholar Plot runs best on following browsers.
 ![Panel 2](https://cloud.githubusercontent.com/assets/5505099/10701617/13096be2-798a-11e5-9af4-b1011addc56e.png)
 
 **10/21/2015** Changes:
-* Added a parameter in getSortedCoAuthorString to distinguish between author and journal name 
+* Added a parameter in getSortedCoAuthorString to distinguish between author and journal name
 * `getSortedCoAuthorString(coAuthorArray, displayCount, isNeedSplit)`
 * Compelted Journal Panel
-* Tried to add pie charts for better insigts
+* update php script to get counts of journals
+* update my_sql to my_sqli
+
 
 **10/20/2015** Changes:
 * Redesigned the getSortedCoAuthorString prototype
