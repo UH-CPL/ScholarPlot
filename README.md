@@ -24,8 +24,8 @@ Scholar Plot runs best on following browsers.
 **10/23/2015** Changes:
 * Finished the two panels both CoAuthors/Journals
 * Bug fixies - IEEE (upper case), Removed Null (`' '`) Authors
-![Panel 1](https://cloud.githubusercontent.com/assets/5505099/10701617/13096be2-798a-11e5-9af4-b1011addc56e.png)
-![Panel 2](https://cloud.githubusercontent.com/assets/5505099/10701618/130d6706-798a-11e5-8e81-b1693eeb1407.png)
+![Panel 1](https://cloud.githubusercontent.com/assets/5505099/10701618/130d6706-798a-11e5-8e81-b1693eeb1407.png)
+![Panel 2](https://cloud.githubusercontent.com/assets/5505099/10701617/13096be2-798a-11e5-9af4-b1011addc56e.png)
 
 **10/21/2015** Changes:
 * Added a parameter in getSortedCoAuthorString to distinguish between author and journal name 
