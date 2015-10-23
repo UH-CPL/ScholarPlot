@@ -47,8 +47,8 @@ Scholar Plot runs best on following browsers.
 * Added a parameter in getSortedCoAuthorString to distinguish between author and journal name
 * `getSortedCoAuthorString(coAuthorArray, displayCount, isNeedSplit)`
 * Compelted Journal Panel
-* update php script to get counts of journals
-* update my_sql to my_sqli
+* Updated php script to get counts of journals
+* Updated my_sql to my_sqli
 
 
 **10/20/2015** Changes:
