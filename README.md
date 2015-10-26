@@ -19,7 +19,6 @@ Scholar Plot runs best on following browsers.
 * NIH: FY 2000 - FY 2013 (14 years, 777,657 rows, 55,456/year)
 * NASA: FY 2007 - FY 2015 (9 years, 16,670 rows, 1,852/year)
 
-
 ## New Ideas
 * Put servey link
 * Pie charts for better insights
@@ -37,6 +36,8 @@ Scholar Plot runs best on following browsers.
 * Add UH faculties in Che, Eng, etc
 * Patent
 
+**10/23/2015
+** Added 43 entries to `scholar_autocomplete`
 
 **10/23/2015** Changes:
 * Finished new two panels both Co-Authors and Journals
