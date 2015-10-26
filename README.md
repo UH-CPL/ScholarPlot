@@ -37,7 +37,7 @@ Scholar Plot runs best on following browsers.
 * Patent
 
 **10/23/2015** Changes:
-** Added 43 entries to `scholar_autocomplete`
+* Added 43 entries to `scholar_autocomplete`
 
 **10/23/2015** Changes:
 * Finished new two panels both Co-Authors and Journals
