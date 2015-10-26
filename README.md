@@ -36,7 +36,7 @@ Scholar Plot runs best on following browsers.
 * Add UH faculties in Che, Eng, etc
 * Patent
 
-**10/23/2015
+**10/23/2015** Changes:
 ** Added 43 entries to `scholar_autocomplete`
 
 **10/23/2015** Changes:
