@@ -38,7 +38,8 @@ Scholar Plot runs best on following browsers.
 
 **10/27/2015** Changes:
 * In order to adjust panel sizes, change the number multiplied by count
-* `(sorted[index].count * 2.0) -> 1.5`
+* `(sorted[index].count * 2.0) -> 1.5` in 324 line
+* Forced no line break of the authors name and bar charts with numbers by new CSS `.nowrap {white-space: nowrap};`
 
 
 **10/26/2015** Changes:
