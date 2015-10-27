@@ -30,6 +30,9 @@ Scholar Plot runs best on following browsers.
 
 **10/xx/2015** Changes:
 * Facebook AD
+* Top 5 Most Cited Papers
+* Top 5 Journals by Impact Factor
+
 
 **10/27/2015** Changes:
 * Deploy the features to the production server.
