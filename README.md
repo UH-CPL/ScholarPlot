@@ -42,7 +42,6 @@ Scholar Plot runs best on following browsers.
 * Database Upgrade from 2.14.3 to the new version 2.15.0
 * `php E:\sites\cpl\kyeongan\projects\piwik/console core:update`
 * Different alignment of Journal Panels
-
 ![Type 1](https://cloud.githubusercontent.com/assets/5505099/10747182/5db95524-7c20-11e5-85b6-85494b842b7c.png)
 ![Type 2](https://cloud.githubusercontent.com/assets/5505099/10747183/5dd4e258-7c20-11e5-880c-0618ae038df6.png)
 
