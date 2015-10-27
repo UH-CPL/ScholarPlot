@@ -24,15 +24,12 @@ Scholar Plot runs best on following browsers.
 * Pie charts for better insights
 * When floating the cursor over a coauthor name, joint papers with focual author should light up to indicate the pattern and placement of coauthors papers
 * New Plot for team and department - may be useful but need to redesign
+* Patent
 
 ## Changelog
 
 **10/xx/2015** Changes:
-* Ordering
-** Last name
 * Facebook AD
-* Add UH faculties in Che, Eng, etc
-* Patent
 
 **10/27/2015** Changes:
 * Deploy the features to the production server.
@@ -41,7 +38,7 @@ Scholar Plot runs best on following browsers.
 * `(sorted[index].count * 2.0) -> 1.5` in 324 line
 * Forced no line break of the authors name and bar charts section by new CSS
 * `.nowrap {white-space: nowrap};`
-
+* 102 entries to `scholar_autocomplete`
 
 **10/26/2015** Changes:
 * Update php for ordering by Impact Factor (Put `-` value down)
@@ -52,9 +49,6 @@ Scholar Plot runs best on following browsers.
 
 ![Type 1](https://cloud.githubusercontent.com/assets/5505099/10747182/5db95524-7c20-11e5-85b6-85494b842b7c.png)
 ![Type 2](https://cloud.githubusercontent.com/assets/5505099/10747183/5dd4e258-7c20-11e5-880c-0618ae038df6.png)
-
-**10/23/2015** Changes:
-* Added 43 entries to `scholar_autocomplete`
 
 **10/23/2015** Changes:
 * Finished new two panels both Co-Authors and Journals
