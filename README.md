@@ -36,6 +36,12 @@ Scholar Plot runs best on following browsers.
 * Add UH faculties in Che, Eng, etc
 * Patent
 
+**10/36/2015** Changes:
+* Update php for ordering by Impact Factor (Put NA value it bottom)
+* Update to the new version 2.15.0
+* Database Upgrade from 2.14.3 to the new version 2.15.0
+* `php E:\sites\cpl\kyeongan\projects\piwik/console core:update`
+
 **10/23/2015** Changes:
 * Added 43 entries to `scholar_autocomplete`
 
