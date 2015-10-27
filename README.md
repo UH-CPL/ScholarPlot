@@ -36,7 +36,12 @@ Scholar Plot runs best on following browsers.
 * Add UH faculties in Che, Eng, etc
 * Patent
 
-**10/36/2015** Changes:
+**10/27/2015** Changes:
+* In order to adjust panel sizes, change the number multiplied by count
+* `(sorted[index].count * 2.0) -> 1.5`
+
+
+**10/26/2015** Changes:
 * Update php for ordering by Impact Factor (Put N/A value down)
 * Update to the new version 2.15.0
 * Database Upgrade from 2.14.3 to the new version 2.15.0
