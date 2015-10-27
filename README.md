@@ -44,7 +44,7 @@ Scholar Plot runs best on following browsers.
 
 
 **10/26/2015** Changes:
-* Update php for ordering by Impact Factor (Put N/A value down)
+* Update php for ordering by Impact Factor (Put `-` value down)
 * Update to the new version 2.15.0
 * Database Upgrade from 2.14.3 to the new version 2.15.0
 * `php E:\sites\cpl\kyeongan\projects\piwik/console core:update`
