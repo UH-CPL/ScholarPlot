@@ -30,12 +30,12 @@ Scholar Plot runs best on following browsers.
 **10/xx/2015** Changes:
 * Ordering
 ** Last name
-* Deploy New Panels to the production server.
 * Facebook AD
 * Add UH faculties in Che, Eng, etc
 * Patent
 
 **10/27/2015** Changes:
+* Deploy the features to the production server.
 * Removed the horizontal scroll of page by adjusting `text-align:center; margin: 0 auto;` and `width:99%` in `main.css`
 * In order to adjust panel sizes, change the number multiplied by count
 * `(sorted[index].count * 2.0) -> 1.5` in 324 line
