@@ -30,7 +30,6 @@ Scholar Plot runs best on following browsers.
 ## Changelog
 
 **10/xx/2015** Changes:
-* Facebook AD
 * Top 5 Most Cited Papers
 * Top 5 Journals by Impact Factor
 
@@ -43,6 +42,7 @@ Scholar Plot runs best on following browsers.
 * Forced no line break of the authors name and bar charts section by new CSS
 * `.nowrap {white-space: nowrap};`
 * 102 entries to `scholar_autocomplete`
+* Started Facebook ADs
 
 **10/26/2015** Changes:
 * Update php for ordering by Impact Factor (Put `-` value down)
