@@ -40,6 +40,7 @@ Scholar Plot runs best on following browsers.
 * Started Facebook ADs
 * Top 5 Journals by Impact Factor
 * Top 5 Most Cited Papers
+* - have a link to Google Scholar
 
 **10/26/2015** Changes:
 * Update php for ordering by Impact Factor (Put `-` value down)
