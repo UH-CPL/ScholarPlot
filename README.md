@@ -29,10 +29,6 @@ Scholar Plot runs best on following browsers.
 
 ## Changelog
 
-**10/xx/2015** Changes:
-* Top 5 Most Cited Papers
-
-
 **10/27/2015** Changes:
 * Deploy the features to the production server.
 * Removed the horizontal scroll of page by adjusting `text-align:center; margin: 0 auto;` and `width:99%` in `main.css`
@@ -43,6 +39,7 @@ Scholar Plot runs best on following browsers.
 * 102 entries to `scholar_autocomplete`
 * Started Facebook ADs
 * Top 5 Journals by Impact Factor
+* Top 5 Most Cited Papers
 
 **10/26/2015** Changes:
 * Update php for ordering by Impact Factor (Put `-` value down)
