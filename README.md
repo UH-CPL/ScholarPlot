@@ -20,7 +20,6 @@ Scholar Plot runs best on following browsers.
 * NASA: FY 2007 - FY 2015 (9 years, 16,670 rows, 1,852/year)
 
 ## New Ideas
-* Efficient way to deal with space of middle
 * Put servey link
 * Pie charts for better insights
 * When floating the cursor over a coauthor name, joint papers with focual author should light up to indicate the pattern and placement of coauthors papers
@@ -29,10 +28,14 @@ Scholar Plot runs best on following browsers.
 
 ## Changelog
 
+**11/02/2015** Changes:
+* 
+
 **11/01/2015** Changes:
 * Deploy the features to the production server.
 * Top 5 Journals by Impact Factor
 * Top 5 Most Cited Papers
+* Better way to deal with space of middle efficiently
 
 **10/27/2015** Changes:
 * Removed the horizontal scroll of page by adjusting `text-align:center; margin: 0 auto;` and `width:99%` in `main.css`
