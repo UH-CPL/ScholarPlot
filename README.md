@@ -29,7 +29,7 @@ Scholar Plot runs best on following browsers.
 ## Changelog
 
 **11/02/2015** Changes:
-* 
+
 
 **11/01/2015** Changes:
 * Deploy the features to the production server.
