@@ -29,10 +29,8 @@ Scholar Plot runs best on following browsers.
 ## Changelog
 
 **11/04/2015** Changes:
-* Brainstorming
-<img src="Figures/Nov-4-2015-1.jpg" width="250">
-<img src="Figures/Nov-4-2015-2.jpg" width="250">
-
+* Add 5 meta tages for sharing Best Practices for Websites & Mobile Apps
+* https://developers.facebook.com/tools/debug/og/object/
 
 **11/01/2015** Changes:
 * Deploy the features to the production server.
