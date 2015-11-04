@@ -28,7 +28,10 @@ Scholar Plot runs best on following browsers.
 
 ## Changelog
 
-**11/02/2015** Changes:
+**11/04/2015** Changes:
+* Brainstorming
+<img src="Figures/Nov-4-2015-1.jpg" width="250">
+<img src="Figures/Nov-4-2015-2.jpg" width="250">
 
 
 **11/01/2015** Changes:
