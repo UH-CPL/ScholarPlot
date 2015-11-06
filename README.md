@@ -31,6 +31,7 @@ Scholar Plot runs best on following browsers.
 **11/04/2015** Changes:
 * Add 5 meta tages for sharing Best Practices for Websites & Mobile Apps
 * https://developers.facebook.com/tools/debug/og/object/
+* Adjected the footer section
 
 **11/01/2015** Changes:
 * Deploy the features to the production server.
