@@ -30,7 +30,8 @@ Scholar Plot runs best on following browsers.
 
 **11/09/2015** Changes:
 * Departmental visualization initial design
-* Need to fix the height size of publicatio plot when legends interact.
+* Fixed the height size of publicatio plot when legends interact
+* ScatterChart.js (Line 206)
 
 **11/04/2015** Changes:
 * Add 5 meta tages for sharing Best Practices for Websites & Mobile Apps
