@@ -28,6 +28,9 @@ Scholar Plot runs best on following browsers.
 
 ## Changelog
 
+**11/10/2015** Changes:
+* Remove `... et al.` when Top 5 Most Cited Paper and Top 5 Journals
+
 **11/09/2015** Changes:
 * Departmental visualization initial design
 * Fixed the height size of publicatio plot when legends interact
