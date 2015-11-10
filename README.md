@@ -30,7 +30,7 @@ Scholar Plot runs best on following browsers.
 
 **11/10/2015** Changes:
 * Remove `... et al.` when Top 5 Most Cited Paper and Top 5 Journals
-* Remove the horizontal line in panel by adjusiting margin-right in css
+* Remove the horizontal line in panel by adjusiting `margin-right: 5em` in CSS
 
 **11/09/2015** Changes:
 * Departmental visualization initial design
