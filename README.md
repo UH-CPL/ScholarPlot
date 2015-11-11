@@ -27,6 +27,8 @@ Scholar Plot runs best on following browsers.
 * Patent
 
 ## Changelog
+**11/11/2015** Changes:
+* Updated images for the help page.
 
 **11/10/2015** Changes:
 * Remove `... et al.` when Top 5 Most Cited Paper and Top 5 Journals
