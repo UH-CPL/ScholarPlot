@@ -27,6 +27,10 @@ Scholar Plot runs best on following browsers.
 * Patent
 
 ## Changelog
+**11/13/2015** Changes:
+* Google Scholar give an errors when privite browsing.
+![Down](https://cloud.githubusercontent.com/assets/5505099/11165876/d3bc0110-8ae2-11e5-8ef0-124f0bd89093.png)
+
 **11/11/2015** Changes:
 * Updated images for the help page.
 
