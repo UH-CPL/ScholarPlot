@@ -24,6 +24,10 @@ Scholar Plot runs best on following browsers.
 
 ## Changelog
 **11/13/2015** Changes:
+* Setup cookies for avoding Google Server Error
+* Issues closed https://github.com/Kyeongan/ScholarPlot/issues/7
+
+**11/13/2015** Changes:
 * Google Scholar gives an errors when it is being requested with privite browsing.
 ![Down](https://cloud.githubusercontent.com/assets/5505099/11165876/d3bc0110-8ae2-11e5-8ef0-124f0bd89093.png)
 
