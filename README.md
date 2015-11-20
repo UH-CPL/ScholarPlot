@@ -26,6 +26,7 @@ Scholar Plot runs best on following browsers.
 **11/13/2015** Changes:
 * Setup cookies for avoding Google Server Error
 * Issues closed https://github.com/Kyeongan/ScholarPlot/issues/7
+* Department plot draft - Need idea what data and charts are useful.
 
 **11/13/2015** Changes:
 * Google Scholar gives an errors when it is being requested with privite browsing.
