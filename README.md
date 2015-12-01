@@ -23,6 +23,9 @@ Scholar Plot runs best on following browsers.
 * When floating the cursor over a coauthor name, joint papers with focual author should light up to indicate the pattern and placement of coauthors papers
 
 ## Changelog
+**12/01/2015** Changes:
+* Added the mean IF value in PHP and HTML
+
 **11/25/2015** Changes:
 * Open an issue to avoid overlapping series: https://github.com/nvd3-community/nvd3/issues/92
 ![Down](https://cloud.githubusercontent.com/assets/5505099/11411101/74e19cdc-9392-11e5-90a9-9d7287c8dade.png)
