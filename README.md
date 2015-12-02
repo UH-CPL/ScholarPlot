@@ -25,6 +25,7 @@ Scholar Plot runs best on following browsers.
 ## Changelog
 **12/01/2015** Changes:
 * Added the mean IF value in PHP and HTML
+* Rename the variable and add the variables
 
 **11/25/2015** Changes:
 * Open an issue to avoid overlapping series: https://github.com/nvd3-community/nvd3/issues/92
