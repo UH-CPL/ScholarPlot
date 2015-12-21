@@ -23,6 +23,15 @@ Scholar Plot runs best on following browsers.
 * When floating the cursor over a coauthor name, joint papers with focual author should light up to indicate the pattern and placement of coauthors papers
 
 ## Changelog
+**12/18/2015** Changes:
+* Departmental Compare
+
+**12/11/2015** Changes:
+* Complete Group Plot and new Menu
+* Group Plot Out
+* http://www.scholarplot.com/blog/index.html
+![](https://cloud.githubusercontent.com/assets/5505099/11642054/79924d62-9d01-11e5-8bf4-ec8d35bede32.png)
+
 **12/01/2015** Changes:
 * Added the mean IF value in PHP and HTML
 * Rename the variable and add the variables
