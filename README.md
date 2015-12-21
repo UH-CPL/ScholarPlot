@@ -24,8 +24,7 @@ Scholar Plot runs best on following browsers.
 
 ## Changelog
 **12/18/2015** Changes:
-* Departmental Compare
-* Boxplot example
+* Departmental Compare and new Menu - Boxplot
 ![Boxplot](https://cloud.githubusercontent.com/assets/5505099/11938891/9d5e6e6e-a7e3-11e5-9b85-a3baec09cf1e.png)
 ![Boxplot2](https://cloud.githubusercontent.com/assets/5505099/11938908/b9e94da6-a7e3-11e5-8e4c-03e374d7c0c5.png)
 
