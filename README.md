@@ -24,7 +24,9 @@ Scholar Plot runs best on following browsers.
 
 ## Changelog
 **12/18/2015** Changes:
-* Departmental Compare
+* Group Compare
+* Boxplot
+![](https://cloud.githubusercontent.com/assets/5505099/11883465/be9c7d68-a4d8-11e5-8091-500cd2e0c658.png)
 
 **12/11/2015** Changes:
 * Complete Group Plot and new Menu
