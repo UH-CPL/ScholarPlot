@@ -23,6 +23,10 @@ Scholar Plot runs best on following browsers.
 * When floating the cursor over a coauthor name, joint papers with focual author should light up to indicate the pattern and placement of coauthors papers
 
 ## Changelog
+**12/13/2015** Changes:
+* Boxplot updated
+* 5 new charts
+
 **12/18/2015** Changes:
 * Departmental Compare and new Menu - Boxplot
 ![Boxplot](https://cloud.githubusercontent.com/assets/5505099/11938891/9d5e6e6e-a7e3-11e5-9b85-a3baec09cf1e.png)
