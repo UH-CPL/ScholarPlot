@@ -23,6 +23,11 @@ Scholar Plot runs best on following browsers.
 * When floating the cursor over a coauthor name, joint papers with focual author should light up to indicate the pattern and placement of coauthors papers
 
 ## Changelog
+**04/25/2016** Changes:
+* All new updates released.
+* CSS / HTML / Contents are all updated.
+
+## Changelog
 **04/12/2016** Changes:
 * Search for schools and summary
 ![Fig](https://cloud.githubusercontent.com/assets/5505099/14481886/c6539e80-00fc-11e6-8c2d-b4ce4c289350.png)
