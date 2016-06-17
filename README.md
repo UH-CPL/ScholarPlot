@@ -22,16 +22,25 @@ Scholar Plot runs best on following browsers.
 ## New Ideas
 * When floating the cursor over a coauthor name, joint papers with focual author should light up to indicate the pattern and placement of coauthors papers
 
+
+## Changelog
+**06/17/2016** Changes:
+Updated the Academic Garden with cloude and have tooltips fixed.
+
+![screen shot 2016-06-17 at 2 29 25 pm](https://cloud.githubusercontent.com/assets/5505099/16162292/1e701e8a-3498-11e6-8e96-8a2492c8c094.png)
+
+
 ## Changelog
 **06/16/2016** Changes:
 * 441 records updated for funding bug fixes due to min year and name
 
-
 **06/14/2016** Changes:
 * Group Compare released
+* 
 
 **06/07/2016** Changes:
 * Academic Garden released
+* ![](https://cloud.githubusercontent.com/assets/5505099/14969574/adf952d0-1088-11e6-8975-94df6a0b40d4.png)
 
 **04/25/2016** Changes:
 * All new updates released.
