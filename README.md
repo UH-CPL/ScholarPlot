@@ -25,8 +25,7 @@ Scholar Plot runs best on following browsers.
 
 ## Changelog
 **06/17/2016** Changes:
-Updated the Academic Garden with cloude and have tooltips fixed.
-
+* Updated the Academic Garden with cloude and have tooltips fixed.
 ![screen shot 2016-06-17 at 2 29 25 pm](https://cloud.githubusercontent.com/assets/5505099/16162292/1e701e8a-3498-11e6-8e96-8a2492c8c094.png)
 
 
@@ -36,7 +35,6 @@ Updated the Academic Garden with cloude and have tooltips fixed.
 
 **06/14/2016** Changes:
 * Group Compare released
-* 
 
 **06/07/2016** Changes:
 * Academic Garden released
