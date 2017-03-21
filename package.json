@@ -1,0 +1,30 @@
+{
+  "name": "scholarplot",
+  "version": "1.0.0",
+  "description": "scholarplot.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kyeongan/ScholarPlot.git"
+  },
+  "keywords": [
+    "dataviz",
+    "scholarplot"
+  ],
+  "author": "karl kwon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kyeongan/ScholarPlot/issues"
+  },
+  "homepage": "https://github.com/Kyeongan/ScholarPlot#readme",
+  "dependencies": {
+    "c3": "^0.4.11",
+    "chartjs": "^0.3.24",
+    "d3": "^3.5.17",
+    "echarts": "^3.4.0",
+    "nvd3": "^1.8.5"
+  }
+}
